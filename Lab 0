@@ -1,0 +1,35 @@
+/*
+	----------------------------------------------------------------------
+	University at Buffalo, EE379, Spring 2021	
+	----------------------------------------------------------------------
+	File Name: main.cc
+	Description: Sample code for Lab 0 that demonstrates basic GPIO setup.
+	
+	Revision History:
+	Date      By          Change
+	----------------------------------------------------------------------
+	20200128  cvfritz     Original
+
+*/
+
+#include <stdio.h>
+#include <xgpio.h>
+#define ONE_SEC 33000000
+
+int main() {
+	XGpio output;							
+
+	int led_val = 0;
+	int count = 0;
+
+	XGpio_Initialize(&output, XPAR_AXI_GPIO_1_DEVICE_ID);	// initialize output XGpio variable
+	XGpio_SetDataDirection(&output, 1, 0);		        // LED outputs, 0 = output 1 = input
+	while (true) {
+		XGpio_DiscreteWrite(&output, 1, led_val);           // Write value to GPIO
+		led_val ^= 4;										// 1. What do these two lines do?
+		led_val &= 4;
+		for (count = 0; count < ONE_SEC; count++);          // 2. What does this line do?
+
+	}
+
+}
