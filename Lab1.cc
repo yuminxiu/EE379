@@ -47,3 +47,38 @@ int main()
         printf("%f \n", y);
     }
 }
+
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    float degree;
+    int term;
+    
+    float sum = 1;
+    float x = degree * M_PI/180;
+    float y = 1;
+    
+    printf("Enter angle in degree: \n");
+    scanf("%f", &degree);
+    
+    printf("How many terms? \n");
+    scanf("%d", &term);
+    
+    
+    
+    for (int i = 1; i < term; i++){
+
+        
+        y *= (-x*-x)/((2*i-1)*(2*i));
+        sum = y + sum;
+        
+    }
+    
+    printf("math.h cos(%f) is %f.\nTaylor cos(%f), %d terms is %f\n", degree, cos(x), degree, term, sum );
+    
+    return 0;
+}
+
