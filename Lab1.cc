@@ -42,10 +42,9 @@ int main()
         printf("Enter number %d: \n", i+1);
         scanf("%f", &x);
         sum += x;
-        
+    }
         float y = sum/num;
         printf("%f \n", y);
-    }
 }
 
 
