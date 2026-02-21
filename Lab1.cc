@@ -58,11 +58,11 @@ int main()
     int term;
     
     float sum = 1;
-    float x = degree * M_PI/180;
     float y = 1;
     
     printf("Enter angle in degree: \n");
     scanf("%f", &degree);
+    float x = degree * M_PI/180;
     
     printf("How many terms? \n");
     scanf("%d", &term);
@@ -72,7 +72,7 @@ int main()
     for (int i = 1; i < term; i++){
 
         
-        y *= (-x*-x)/((2*i-1)*(2*i));
+        y *= (-x*x)/((2*i-1)*(2*i));
         sum = y + sum;
         
     }
