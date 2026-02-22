@@ -81,3 +81,29 @@ int main()
     return 0;
 }
 
+
+
+#include <stdio.h>
+
+int main(){
+
+	int a[5];
+	int store;
+
+	printf("Enter five numbers: \n");
+	for (int i = 0; i<5; i++){
+		scanf("%d", &a[i]);
+	}
+
+	for (int j = i +1; j<5; j++){
+		if (a[j] < a[i]){
+		store = a[i];
+		a[i] = a[j];
+		a[j] = store;
+		}
+	for (int i = 0; i < 5; i++){
+	printf("%d ", a[i]);
+}
+
+return 0;
+}
