@@ -21,6 +21,11 @@ int main() {
 
 	int led_val = 0;
 	int count = 0;
+	int mode = 0; // 0..3
+	int dir = 1;
+	int btn;
+	int speed;
+	int delay = ONE_SEC / 5;
 
   XGpio_Initialize(&input, XPAR_AXI_GPIO_0_DEVICE_ID); // initialize input XGpio variable
 	XGpio_Initialize(&output, XPAR_AXI_GPIO_1_DEVICE_ID);	// initialize output XGpio variable
@@ -31,27 +36,64 @@ int main() {
 	
   while (true) {
     switch_data = XGpio_DiscreteRead(&input, 1);
-    if ( /*check if bit 0 is a 1 */ ) {
-      // turn on LED
+    if ( switch_data & 0x01 ) {
+      XGpio_DiscreteWrite(&output,1 ,0x01); // turn on LED
     }
     else {
-      // turn off the LED
+      XGpio_DiscreteWrite(&output,1 ,0x0);// turn off the LED
     }
-
+	  if (switch_data & 0x01){
+		  mode++;
+		  if (mode == 4)
+			  mode = 0;
+		  led_val = 0;
+		  dir = 1;
+	  }
+	  if (switch_data & 0x02) {
+		  speed ++;
+		  
+	  if (speed == 3)
+		  speed = 0;
+	  }
+	switch(speed){
+		case 0: delay = ONE_SEC / 4;
+		case 1: delay = ONE_SEC / 2;
+		case 2: delay = ONE_SEC / 10;
+		case 3: delay = ONE_SEC * 2;
+		default: delay = ONE_SEC;
 	}
+	  switch(mode){
+		  case 0: // Mode 1: Left -> Right, wrap
+			  XGpio_DiscreteWrite(&output,1 ,(1<< led_val));
+			  led_val++;
+			  if (led_val == 8)
+				  led_val = 0;
+			  break;
 
+		  case 1: // Mode 2: Right -> Left, wrap
+
+			  XGpio_DiscreteWrite(&output, 1, (1 << led_val));
+			  led_val --;
+			  if (led_val < 0)
+				  led_val = 7;
+			  break;
+
+		  case 2: // Mode 3: Back and forth
+			  XGpio_DiscreteWrite(&output,1 , (1 << led_val);
+			  led_val += dir;
+			  if (led_val == 7)
+				  dir = -1;
+			  if (led_val == 0)
+				  dir = 1;
+			  break;
+
+		  case 3: // All 4 together
+			  XGpio_DiscreteWrite(&output,1 , (1 << led_val);
+			  if
+	for (count = 0; count < delay; count++);
+	}
+return 0;
 }
 
-// to adjust speed, use count as a terminal. 
-// 1. default speed 33000000
-// 2. 2x fast 33000000 / 2
-// 3. half speed 33000000 * 2
-// 4. .25 speed 33000000 * .25
-
-// use case statements to create a FSM w/ 4 modes
-// Mode 1: Left -> Right, wrap
-// Mode 2: Right -> Left, wrap
-// Mode 3: Left -> Right -> Left, cont.
-// Mode 4: All Flash together
 
 
