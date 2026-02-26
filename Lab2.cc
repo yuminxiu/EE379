@@ -23,9 +23,9 @@ int main() {
 	int count = 0;
 	int mode = 0; // 0..3
 	int dir = 1;
-	int btn;
-	int speed;
-	int delay = ONE_SEC / 5;
+	int all;
+	int speed = 0;
+	int delay;
 
   XGpio_Initialize(&input, XPAR_AXI_GPIO_0_DEVICE_ID); // initialize input XGpio variable
 	XGpio_Initialize(&output, XPAR_AXI_GPIO_1_DEVICE_ID);	// initialize output XGpio variable
@@ -36,24 +36,22 @@ int main() {
 	
   while (true) {
     switch_data = XGpio_DiscreteRead(&input, 1);
-    if ( switch_data & 0x01 ) {
-      XGpio_DiscreteWrite(&output,1 ,0x01); // turn on LED
-    }
-    else {
-      XGpio_DiscreteWrite(&output,1 ,0x0);// turn off the LED
-    }
 	  if (switch_data & 0x01){
 		  mode++;
+		  
 		  if (mode == 4)
 			  mode = 0;
 		  led_val = 0;
+		  all = 0;
 		  dir = 1;
+		  XGpio_DiscreteRead(&input,1) &0x01); // turn on LED
 	  }
 	  if (switch_data & 0x02) {
 		  speed ++;
 		  
 	  if (speed == 3)
 		  speed = 0;
+		  XGpio_DiscreteRead(&input,1) &0x02);
 	  }
 	switch(speed){
 		case 0: delay = ONE_SEC / 4;
@@ -88,8 +86,10 @@ int main() {
 			  break;
 
 		  case 3: // All 4 together
-			  XGpio_DiscreteWrite(&output,1 , (1 << led_val);
-			  if
+			  all = !all;
+			  if (all) {
+			  XGpio_DiscreteWrite(&output,1 , 0xF);}
+			  else { XGpio_DiscreteWrite(&output,1,0x0);}
 	for (count = 0; count < delay; count++);
 	}
 return 0;
