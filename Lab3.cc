@@ -13,11 +13,29 @@
 */
 
 #include <MyDisp.h>
+#define clrPink 0x00FFC0CBul
 
 int main() {
 	MYDISP display;
 	display.begin();
-	
-	
+	display.clearDisplay(clrWhite);
+
+	int cx = 120;
+	int cy = 160;
+	int w = 20;
+	int vx - 10;
+	int vx - 8;
+
+
+	while(true){
+		setForeground(clrWhite);//set foreground to white
+		drawRectangle(bool fill, int 110, int 150, int 129, int 169);//draw rectangle centered at (cx,cy)
+		if (cy <320 - w/2) cy += 5;
+		setForeground(clrPink); //set foreground color to color the color of square
+		drawRectangle(bool fill, int 110, int 170, int 130, int 150); //draw rectangle centered at (cx,cy)
+		//wait about 0.5 sec
+	}
+
 
 }
+
