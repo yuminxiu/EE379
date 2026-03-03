@@ -22,7 +22,6 @@ int main() {
 	int led_val = 0;
 	int count = 0;
 	int mode = 0; // 0..3
-	int dir = 1;
 	int all;
 	int speed = 0;
 	int delay;
@@ -42,7 +41,7 @@ int main() {
 		  mode++;
 	  }
 		  
-	  if (mode > 4){
+	  if (mode > 3){
 		  mode = 0;
 		  led_val = 0;
 		  all = 0;
