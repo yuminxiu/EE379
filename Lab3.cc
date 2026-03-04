@@ -39,4 +39,12 @@ int main() {
 
 }
 
+// Trapezoid
+			// P = a + b1 + c + b2
+			// A = 1/2h(b1+b2)
+
+//plus sign
+			//drawRectangle(true,118,140,122,180);
+			//drawRectangle(true,100,158,140,162);
+
 
