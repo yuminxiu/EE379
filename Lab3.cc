@@ -39,7 +39,7 @@ int main() {
 
 
 	  XGpio_SetDataDirection(&input, 1, 0xF);  // Switch inputs
-	
+
 
 	while(true){
 		switch_data = XGpio_DiscreteRead(&input, 1);
@@ -62,11 +62,12 @@ int main() {
 		cy += vy;
 		cx += vx;
 		//display.drawRectangle(true, 110, 150, 129, 169);//draw rectangle centered at (cx,cy)
-		if ((cx < 0 || cx > 240 - w/2)) vx = -vx;
-		if ((cy < 0|| cy > 320 - w/2)) vy = -vy;
+		if ((cx < w/2 || cx > 240 - w/2)) vx = -vx;
+		if ((cy < w/2 || cy > 320 - w/2)) vy = -vy;
 		display.setForeground(color); //set foreground color to color the color of square
-		display.drawRectangle(true, cx-10, cy-10, cx+9, cy+9);
-
+		//display.drawRectangle(true, cx-10, cy-10, cx+9, cy+9);
+		display.drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
+		display.drawRectangle(true,cx-20,cy-2,cx+20,cy+2);
 		//display.drawRectangle(true, 110, 170, 130, 150); //draw rectangle centered at (cx,cy)
 		for(count =0; count < delay; count ++);
 	}
@@ -79,6 +80,6 @@ int main() {
 			// A = 1/2h(b1+b2)
 
 //plus sign
-			//drawRectangle(true,118,140,122,180);
-			//drawRectangle(true,100,158,140,162);
+			//drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
+			//drawRectangle(true,cx-20,cy-2,cx+20,cy+2);
 
