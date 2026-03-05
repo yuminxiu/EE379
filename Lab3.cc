@@ -1,10 +1,10 @@
 /*
 	----------------------------------------------------------------------
-	University at Buffalo, EE379, Spring 2020	
+	University at Buffalo, EE379, Spring 2020
 	----------------------------------------------------------------------
 	File Name: Lab3.cc
 	Description: Strating point for Lab 3 code - include MTDS libraries.
-	
+
 	Revision History:
 	Date      By          Change
 	----------------------------------------------------------------------
@@ -35,14 +35,14 @@ int main() {
 	while(true){
 		display.setForeground(clrWhite);//set foreground to white
 		display.drawRectangle(true, cx-10, cy-10, cx+9, cy+9);
+		cy += vy;
+		cx += vx;
 		//display.drawRectangle(true, 110, 150, 129, 169);//draw rectangle centered at (cx,cy)
-		if (cy <320 - w/2) cy += 5;
+		if ((cx < 0 || cx > 240 - w/2)) vx = -vx;
+		if ((cy < 0|| cy > 320 - w/2)) vy = -vy;
 		display.setForeground(clrPink); //set foreground color to color the color of square
 		display.drawRectangle(true, cx-10, cy-10, cx+9, cy+9);
-		if (cy < 320 - w/2){
-			cx += vx;
-			cy += vy;
-		}
+
 		//display.drawRectangle(true, 110, 170, 130, 150); //draw rectangle centered at (cx,cy)
 		for(count =0; count < delay; count ++);
 	}
