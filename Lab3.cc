@@ -14,26 +14,37 @@
 
 #include <MyDisp.h>
 #define clrPink 0x00FFC0CBul
+#define ONE_SEC 33000000
+
 
 int main() {
 	MYDISP display;
 	display.begin();
 	display.clearDisplay(clrWhite);
 
+
 	int cx = 120;
 	int cy = 160;
 	int w = 20;
-	int vx - 10;
-	int vy - 8;
+	int vx = 10;
+	int vy = 8;
+	int delay = ONE_SEC/2;
+	int count = 0;
 
 
 	while(true){
 		display.setForeground(clrWhite);//set foreground to white
-		display.drawRectangle(bool fill, int 110, int 150, int 129, int 169);//draw rectangle centered at (cx,cy)
+		display.drawRectangle(true, cx-10, cy-10, cx+9, cy+9);
+		//display.drawRectangle(true, 110, 150, 129, 169);//draw rectangle centered at (cx,cy)
 		if (cy <320 - w/2) cy += 5;
 		display.setForeground(clrPink); //set foreground color to color the color of square
-		display.drawRectangle(bool fill, int 110, int 170, int 130, int 150); //draw rectangle centered at (cx,cy)
-		//wait about 0.5 sec
+		display.drawRectangle(true, cx-10, cy-10, cx+9, cy+9);
+		if (cy < 320 - w/2){
+			cx += vx;
+			cy += vy;
+		}
+		//display.drawRectangle(true, 110, 170, 130, 150); //draw rectangle centered at (cx,cy)
+		for(count =0; count < delay; count ++);
 	}
 
 
@@ -46,5 +57,4 @@ int main() {
 //plus sign
 			//drawRectangle(true,118,140,122,180);
 			//drawRectangle(true,100,158,140,162);
-
 
