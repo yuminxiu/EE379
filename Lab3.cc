@@ -13,6 +13,7 @@
 */
 
 #include <MyDisp.h>
+#include <xgpio.h>
 #define clrPink 0x00FFC0CBul
 #define ONE_SEC 33000000
 
@@ -22,7 +23,7 @@ int main() {
 	display.begin();
 	display.clearDisplay(clrWhite);
 
-
+	XGpio input;
 	int cx = 120;
 	int cy = 160;
 	int w = 20;
@@ -30,9 +31,32 @@ int main() {
 	int vy = 8;
 	int delay = ONE_SEC/2;
 	int count = 0;
+	int switch_data;
+	int mode = 0;
+	uint32_t color;
 
+	 XGpio_Initialize(&input, XPAR_AXI_GPIO_0_DEVICE_ID); // initialize input XGpio variable
+
+
+	  XGpio_SetDataDirection(&input, 1, 0xF);  // Switch inputs
+	
 
 	while(true){
+		switch_data = XGpio_DiscreteRead(&input, 1);
+		if (switch_data & 0x1){
+			mode++;
+		}
+		if (mode > 3){
+			mode = 0;
+		}
+
+		switch(mode){
+		case 0: color = clrPink; break;
+		case 1: color = clrCyan; break;
+		case 2: color = clrMagenta; break;
+		case 3: color = clrYellow; break;
+
+		}
 		display.setForeground(clrWhite);//set foreground to white
 		display.drawRectangle(true, cx-10, cy-10, cx+9, cy+9);
 		cy += vy;
@@ -40,7 +64,7 @@ int main() {
 		//display.drawRectangle(true, 110, 150, 129, 169);//draw rectangle centered at (cx,cy)
 		if ((cx < 0 || cx > 240 - w/2)) vx = -vx;
 		if ((cy < 0|| cy > 320 - w/2)) vy = -vy;
-		display.setForeground(clrPink); //set foreground color to color the color of square
+		display.setForeground(color); //set foreground color to color the color of square
 		display.drawRectangle(true, cx-10, cy-10, cx+9, cy+9);
 
 		//display.drawRectangle(true, 110, 170, 130, 150); //draw rectangle centered at (cx,cy)
