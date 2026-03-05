@@ -35,6 +35,7 @@ int main() {
 	int mode = 0;
 	uint32_t color;
 	int edge = 0;
+	int shape = 0;
 
 	 XGpio_Initialize(&input, XPAR_AXI_GPIO_0_DEVICE_ID); // initialize input XGpio variable
 
@@ -60,7 +61,17 @@ int main() {
 		case 3: color = clrYellow; break;
 
 		}
-		switch(){
+
+	/////////////////////////////SHAPE CHANGE//////////////////////////////////////////////
+		if (btn1){
+			shape++;
+		}
+
+		if (shape > 3){
+			shape = 0;
+		}
+		
+		switch(shape){
 			case 0: display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10); break; // square
 			case 1:
 				display.drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
@@ -69,11 +80,15 @@ int main() {
 			case 2: // circle
 			case 3:
 		}
+
+
+		//////////////////////////////////////////////////
+		
 		display.setForeground(clrWhite);//set foreground to white
 		display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10);
 		cy += vy;
 		cx += vx;
-		//display.drawRectangle(true, 110, 150, 129, 169);//draw rectangle centered at (cx,cy)
+		
 		if ((cx <= w/2 || cx >= 240 - w/2)) vx = -vx;
 		if ((cy <= w/2 || cy >= 320 - w/2)) vy = -vy;
 		display.setForeground(color); //set foreground color to color the color of square
@@ -92,5 +107,6 @@ int main() {
 //plus sign
 			//drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
 			//drawRectangle(true,cx-20,cy-2,cx+20,cy+2);
+
 
 
