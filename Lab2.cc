@@ -45,7 +45,6 @@ int main() {
 		  mode = 0;
 		  led_val = 0;
 		  all = 0;
-		  dir = 1;
 	  }
 	  if (switch_data & 0x02) {
 		  speed ++;
