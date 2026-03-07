@@ -84,6 +84,11 @@ int main() {
 				display.drawLine(cx-7, cy-7, cx+7, cy+7);
 				display.drawLine(cx-7, cy+7, cx+7, cy-7);
 			break;
+			case 5:
+				display.drawEllipse(cx-10, cy-10, cx, cy);
+				display.drawEllipse(cx, cy-10, cx+10, cy);
+				display.drawRectangle(true, cx-10, cy-5, cx+10, cy+10);
+			break;
 		}
 		
 		cy += vy;
@@ -102,7 +107,7 @@ int main() {
 
 		if (edge){
 			shape++;
-			if (shape > 4){
+			if (shape > 5){
 				shape = 0;
 			}
 		}
@@ -127,6 +132,11 @@ int main() {
 				display.drawLine(cx-7, cy-7, cx+7, cy+7);
 				display.drawLine(cx-7, cy+7, cx+7, cy-7);
 			break;
+			case 5:
+				display.drawEllipse(cx-10, cy-10, cx, cy);
+				display.drawEllipse(cx, cy-10, cx+10, cy);
+				display.drawRectangle(true, cx-10, cy-5, cx+10, cy+10);
+			break;
 		}
 	
 		
@@ -143,6 +153,7 @@ int main() {
 //plus sign
 			//drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
 			//drawRectangle(true,cx-20,cy-2,cx+20,cy+2);
+
 
 
 
