@@ -64,7 +64,7 @@ int main() {
 
 		//////////////////////////////////////////////////
 		
-		clearDisplay(clrWhite);//set foreground to white
+		display.clearDisplay(clrWhite);//set foreground to white
 		switch(shape){
 			case 0: display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10); break; // square
 			case 1:
@@ -143,6 +143,7 @@ int main() {
 //plus sign
 			//drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
 			//drawRectangle(true,cx-20,cy-2,cx+20,cy+2);
+
 
 
 
