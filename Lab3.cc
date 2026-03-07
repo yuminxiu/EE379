@@ -64,33 +64,7 @@ int main() {
 
 		//////////////////////////////////////////////////
 		
-		display.clearDisplay(clrWhite);//set foreground to white
-		switch(shape){
-			case 0: display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10); break; // square
-			case 1:
-				display.drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
-				display.drawRectangle(true,cx-10,cy-2,cx+10,cy+2);
-				break; // cross
-			case 2: display.drawEllipse(true, cx, cy, 10, 10); break; // circle
-			case 3:
-					display.drawEllipse(true, cx, cy, 10, 10);
-					display.setForeground(clrWhite);
-					display.drawEllipse(true, cx+4, cy, 10, 10);
-					display.setForeground(color);
-			break;
-			case 4:
-				display.drawLine(cx-10, cy, cx+10, cy);
-				display.drawLine(cx, cy-10, cx, cy+10);
-				display.drawLine(cx-7, cy-7, cx+7, cy+7);
-				display.drawLine(cx-7, cy+7, cx+7, cy-7);
-			break;
-			case 5:
-				display.drawEllipse(cx-10, cy-10, cx, cy);
-				display.drawEllipse(cx, cy-10, cx+10, cy);
-				display.drawRectangle(true, cx-10, cy-5, cx+10, cy+10);
-			break;
-		}
-		
+		display.clearDisplay(clrWhite);//set foreground to white		
 		cy += vy;
 		cx += vx;
 		edge = 0; 
@@ -104,7 +78,7 @@ int main() {
 			vy = -vy;
 			edge = 1;
 		}
-
+//// change shape on edge touch
 		if (edge){
 			shape++;
 			if (shape > 5){
@@ -159,6 +133,14 @@ int main() {
 
 display.checkTouch();
 display.getFinger(0, &finger0);
+
+if (finger.st == FINGER_DOWN){
+	mode ++;
+	if (mode > 3){
+		mode = 0;
+	}
+}
+
 
 
 
