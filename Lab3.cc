@@ -90,7 +90,7 @@ int main() {
 		switch(shape){
 			case 0: display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10); break; // square
 			case 1:
-				display.drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
+				display.drawRectangle(true,cx-2,cy-10,cx+2,cy+10);
 				display.drawRectangle(true,cx-10,cy-2,cx+10,cy+2);
 				break; // cross
 			case 2: display.drawEllipse(true, cx, cy, 10, 10); break; // circle
@@ -140,6 +140,7 @@ if (finger.st == FINGER_DOWN){
 		mode = 0;
 	}
 }
+
 
 
 
