@@ -15,7 +15,6 @@
 #include <MyDisp.h>
 #include <xgpio.h>
 #define clrPink 0x00FFC0CBul
-#define ONE_SEC 33000000
 
 
 int main() {
@@ -29,13 +28,14 @@ int main() {
 	int w = 20;
 	int vx = 10;
 	int vy = 8;
-	int delay = ONE_SEC/2;
+	int delay = 300000;
 	int count = 0;
 	int switch_data;
 	int mode = 0;
 	uint32_t color;
 	int edge = 0;
 	int shape = 0;
+	MDFNG finger0;
 
 	 XGpio_Initialize(&input, XPAR_AXI_GPIO_0_DEVICE_ID); // initialize input XGpio variable
 
@@ -155,6 +155,10 @@ int main() {
 			//drawRectangle(true,cx-20,cy-2,cx+20,cy+2);
 
 
+/// replace btn w/following for touch display. place at top of the loop
+
+display.checkTouch();
+display.getFinger(0, &finger0);
 
 
 
