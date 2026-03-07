@@ -46,7 +46,7 @@ int main() {
 	while(true){
 		switch_data = XGpio_DiscreteRead(&input, 1);
 		int btn0 = (switch_data & 0x01);
-		int btn1 = (switch_data & 0x02);
+
 		if (btn0){
 			mode++;
 		}
@@ -62,37 +62,73 @@ int main() {
 
 		}
 
-	/////////////////////////////SHAPE CHANGE//////////////////////////////////////////////
-		if (btn1){
-			shape++;
-		}
-
-		if (shape > 3){
-			shape = 0;
-		}
+		//////////////////////////////////////////////////
 		
+		clearDisplay(clrWhite);//set foreground to white
 		switch(shape){
 			case 0: display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10); break; // square
 			case 1:
 				display.drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
-				display.drawRectangle(true,cx-20,cy-2,cx+20,cy+2);
+				display.drawRectangle(true,cx-10,cy-2,cx+10,cy+2);
 				break; // cross
-			case 2: // circle
+			case 2: display.drawEllipse(true, cx, cy, 10, 10); break; // circle
 			case 3:
+					display.drawEllipse(true, cx, cy, 10, 10);
+					display.setForeground(clrWhite);
+					display.drawEllipse(true, cx+4, cy, 10, 10);
+					display.setForeground(color);
+			break;
+			case 4:
+				display.drawLine(cx-10, cy, cx+10, cy);
+				display.drawLine(cx, cy-10, cx, cy+10);
+				display.drawLine(cx-7, cy-7, cx+7, cy+7);
+				display.drawLine(cx-7, cy+7, cx+7, cy-7);
+			break;
 		}
-
-
-		//////////////////////////////////////////////////
 		
-		display.setForeground(clrWhite);//set foreground to white
-		display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10);
 		cy += vy;
 		cx += vx;
+		edge = 0; 
 		
-		if ((cx <= w/2 || cx >= 240 - w/2)) vx = -vx;
-		if ((cy <= w/2 || cy >= 320 - w/2)) vy = -vy;
+		if ((cx <= w/2 || cx >= 240 - w/2)){
+			vx = -vx;
+			edge = 1;
+		}
+		
+		if ((cy <= w/2 || cy >= 320 - w/2)){
+			vy = -vy;
+			edge = 1;
+		}
+
+		if (edge){
+			shape++;
+			if (shape > 4){
+				shape = 0;
+			}
+		}
+		
 		display.setForeground(color); //set foreground color to color the color of square
-		display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10);
+		switch(shape){
+			case 0: display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10); break; // square
+			case 1:
+				display.drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
+				display.drawRectangle(true,cx-10,cy-2,cx+10,cy+2);
+				break; // cross
+			case 2: display.drawEllipse(true, cx, cy, 10, 10); break; // circle
+			case 3:
+					display.drawEllipse(true, cx, cy, 10, 10);
+					display.setForeground(clrWhite);
+					display.drawEllipse(true, cx+4, cy, 10, 10);
+					display.setForeground(color);
+			break;
+			case 4:
+				display.drawLine(cx-10, cy, cx+10, cy);
+				display.drawLine(cx, cy-10, cx, cy+10);
+				display.drawLine(cx-7, cy-7, cx+7, cy+7);
+				display.drawLine(cx-7, cy+7, cx+7, cy-7);
+			break;
+		}
+	
 		
 		for(count =0; count < delay; count ++);
 	}
@@ -107,6 +143,7 @@ int main() {
 //plus sign
 			//drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
 			//drawRectangle(true,cx-20,cy-2,cx+20,cy+2);
+
 
 
 
