@@ -14,7 +14,9 @@
 
 #include <MyDisp.h>
 #include <xgpio.h>
+#include <mtds.h>
 #define clrPink 0x00FFC0CBul
+#define ONE_SEC 33000000
 
 
 int main() {
@@ -28,7 +30,7 @@ int main() {
 	int w = 20;
 	int vx = 10;
 	int vy = 8;
-	int delay = 300000;
+	int delay = 10000000;
 	int count = 0;
 	int switch_data;
 	int mode = 0;
@@ -44,36 +46,45 @@ int main() {
 
 
 	while(true){
-		switch_data = XGpio_DiscreteRead(&input, 1);
-		int btn0 = (switch_data & 0x01);
+		//switch_data = XGpio_DiscreteRead(&input, 1);
+	//	int btn0 = (switch_data & 0x01);
 
-		if (btn0){
-			mode++;
-		}
-		if (mode > 3){
-			mode = 0;
-		}
+		//if (btn0){
+		//	mode++;
+		//}
+		//if (mode > 3){
+		//	mode = 0;
+		//}
+		display.checkTouch();
+		display.getFinger(0, &finger0);
+
+		if (finger0.st == FINGER_DOWN){
+			mode ++;
+			if (mode > 3){
+				mode = 0;
+			}
+	}
 
 		switch(mode){
 		case 0: color = clrPink; break;
 		case 1: color = clrCyan; break;
 		case 2: color = clrMagenta; break;
-		case 3: color = clrYellow; break;
+		case 3: color = clrGreen; break;
 
 		}
 
 		//////////////////////////////////////////////////
-		
-		display.clearDisplay(clrWhite);//set foreground to white		
+
+		display.clearDisplay(clrWhite);//set foreground to white
 		cy += vy;
 		cx += vx;
-		edge = 0; 
-		
+		edge = 0;
+
 		if ((cx <= w/2 || cx >= 240 - w/2)){
 			vx = -vx;
 			edge = 1;
 		}
-		
+
 		if ((cy <= w/2 || cy >= 320 - w/2)){
 			vy = -vy;
 			edge = 1;
@@ -81,11 +92,11 @@ int main() {
 //// change shape on edge touch
 		if (edge){
 			shape++;
-			if (shape > 5){
+			if (shape > 4){
 				shape = 0;
 			}
 		}
-		
+
 		display.setForeground(color); //set foreground color to color the color of square
 		switch(shape){
 			case 0: display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10); break; // square
@@ -93,56 +104,33 @@ int main() {
 				display.drawRectangle(true,cx-2,cy-10,cx+2,cy+10);
 				display.drawRectangle(true,cx-10,cy-2,cx+10,cy+2);
 				break; // cross
-			case 2: display.drawEllipse(true, cx, cy, 10, 10); break; // circle
+
+			case 2: display.drawEllipse(true, cx-10, cy-10, cx+10, cy+10); break; // circle
 			case 3:
-					display.drawEllipse(true, cx, cy, 10, 10);
+					display.drawEllipse(true, cx-10, cy-10, cx+10,cy+10);
 					display.setForeground(clrWhite);
-					display.drawEllipse(true, cx+4, cy, 10, 10);
+					display.drawEllipse(true, cx-10, cy-4, cx+10, cy+10);
 					display.setForeground(color);
+
 			break;
+
 			case 4:
 				display.drawLine(cx-10, cy, cx+10, cy);
 				display.drawLine(cx, cy-10, cx, cy+10);
 				display.drawLine(cx-7, cy-7, cx+7, cy+7);
 				display.drawLine(cx-7, cy+7, cx+7, cy-7);
 			break;
-			case 5:
-				display.drawEllipse(cx-10, cy-10, cx, cy);
-				display.drawEllipse(cx, cy-10, cx+10, cy);
-				display.drawRectangle(true, cx-10, cy-5, cx+10, cy+10);
-			break;
+
+			//case 5:
+				//display.drawRectangle(true, cx-6, cy-5, cy+6, cy+5);
+				//display.drawEllipse(true,cx-10, cy-5, cx-2, cy+5);
+				//display.drawEllipse(true,cx+2, cy-5, cx-10, cy+5);
+
+			//break;
 		}
-	
-		
+
+
 		for(count =0; count < delay; count ++);
 	}
 
-
 }
-
-// Trapezoid
-			// P = a + b1 + c + b2
-			// A = 1/2h(b1+b2)
-
-//plus sign
-			//drawRectangle(true,cx-2,cy-20,cx+2,cy+20);
-			//drawRectangle(true,cx-20,cy-2,cx+20,cy+2);
-
-
-/// replace btn w/following for touch display. place at top of the loop
-
-display.checkTouch();
-display.getFinger(0, &finger0);
-
-if (finger.st == FINGER_DOWN){
-	mode ++;
-	if (mode > 3){
-		mode = 0;
-	}
-}
-
-
-
-
-
-
