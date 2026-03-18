@@ -39,10 +39,10 @@ int main() {
 	int shape = 0;
 	MDFNG finger0;
 
-	 XGpio_Initialize(&input, XPAR_AXI_GPIO_0_DEVICE_ID); // initialize input XGpio variable
+	// XGpio_Initialize(&input, XPAR_AXI_GPIO_0_DEVICE_ID); // initialize input XGpio variable
 
 
-	  XGpio_SetDataDirection(&input, 1, 0xF);  // Switch inputs
+	  // XGpio_SetDataDirection(&input, 1, 0xF);  // Switch inputs
 
 
 	while(true){
