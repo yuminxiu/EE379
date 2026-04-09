@@ -1,112 +1,130 @@
-    .global main
-    .text
+.global main
+.text
+
 main:
-	LDR R2, =0x41210000 //XPAR_AXI_GPIO_1_BASEADDR + XGPIO_DATA_OFFSET
-	LDR R0, =0x41210004 //XPAR_AXI_GPIO_1_BASEADDR + XGPIO_TRI_OFFSET
-	MOV R1, #0x00
-	STR R1, [R0]		//Set direction of all pins to output
-	B main_loop
 
-delay:
-	MOV R4, #0			// int R4;
-delay_loop:
-	ADD R4, R4, #1		// for(R4 = 0; R4 < R1; R4++);
-	CMP R4, R1
-	BLT delay_loop
-	MOV PC, LR 			//return
+    LDR R2, =0x41210000
+    LDR R3, =0x41210004
+    LDR R6, =0x41200000
 
+    MOV R1, #0
+    STR R1, [R3]
 
-RTL:
-	MOV R3, #1
-	STR R3, [R2] 		//turn on LED - write 1 to data register
-	LDR R1, =33333333
-	BL delay			//delay(333333333)
-	MOV R3, #0
-	STR R3, [R2]		//turn off LED - write 0 to data register
-	BL delay
-	MOV R3, #2
-	STR R3, [R2]
-	LDR R1, =33333333
-	BL delay
-	MOV R3, #0
-	STR R3, [R2]
-	BL delay
-	MOV R3, #4
-	STR R3, [R2]
-	LDR R1, =33333333
-	BL delay
-	MOV R3, #0
-	STR R3, [R2]
-	BL delay
-	MOV R3, #8
-	STR R3, [R2]
-	LDR R1, =33333333
-	BL delay
-	MOV R3, #0
-	STR R3, [R2]
-	BL delay
-	MOV PC, LR
-
-
-LTR:
-	MOV R3, #8
-	STR R3, [R2] 		//turn on LED - write 1 to data register
-	LDR R1, =33333333
-	BL delay			//delay(333333333)
-	MOV R3, #0
-	STR R3, [R2]		//turn off LED - write 0 to data register
-	BL delay
-	MOV R3, #4
-	STR R3, [R2]
-	LDR R1, =33333333
-	BL delay
-	MOV R3, #0
-	STR R3, [R2]
-	BL delay
-	MOV R3, #2
-	STR R3, [R2]
-	LDR R1, =33333333
-	BL delay
-	MOV R3, #0
-	STR R3, [R2]
-	BL delay
-	MOV R3, #1
-	STR R3, [R2]
-	LDR R1, =33333333
-	BL delay
-	MOV R3, #0
-	STR R3, [R2]
-	BL delay
-	MOV PC, LR
-	
-BNF:
-	BL RTL
-	BL LTR
-	B BNF
-
-ALL:
-	MOV R3, #15
-	STR R3, [R2] 		//turn on LED - write 1 to data register
-	LDR R1, =33333333
-	BL delay			//delay(333333333)
-	MOV R3, #0
-	STR R3, [R2]		//turn off LED - write 0 to data register
-	BL delay
-	MOV PC, LR
+    MOV R7, #0
+    MOV R4, #1
+    MOV R8, #0
 
 main_loop:
-	check pushbutton
-	if mode == 1
-	if mode == 2
-	if mode == 3
-	if mode == 4
-	repeat
 
-MOV r3,#1
-str r3, [r2]
-ldr r1, =33333333
-bl delay
-cmp r3, #8
-lsl r3, r3, #1
-B label
+    LDR R5, [R6]
+    AND R5, R5, #1
 
+    CMP R5, #1
+    BNE run_mode
+
+    ADD R7, R7, #1
+    CMP R7, #4
+    BLE run_mode
+
+    MOV R7, #0
+
+
+run_mode:
+
+    CMP R7, #0
+    BEQ mode_off
+
+    CMP R7, #1
+    BEQ mode_blink
+
+    CMP R7, #2
+    BEQ mode_shift_right
+
+    CMP R7, #3
+    BEQ mode_shift_left
+
+    CMP R7, #4
+    BEQ mode_bounce
+
+
+mode_off:
+    MOV R4, #0
+    STR R4, [R2]
+    B delay_and_repeat
+
+
+mode_blink:
+    EOR R4, R4, #15
+    STR R4, [R2]
+    B delay_and_repeat
+
+
+mode_shift_right:
+
+    LSR R4, R4, #1
+    CMP R4, #0
+    BNE store_led
+
+    MOV R4, #8
+
+store_led:
+    STR R4, [R2]
+    B delay_and_repeat
+
+
+mode_shift_left:
+
+    LSL R4, R4, #1
+    CMP R4, #16
+    BLT store_led
+
+    MOV R4, #1
+    STR R4, [R2]
+    B delay_and_repeat
+
+
+mode_bounce:
+
+    STR R4, [R2]
+
+    CMP R8, #0
+    BEQ shift_right
+
+
+shift_left:
+
+    LSL R4, R4, #1
+    CMP R4, #8
+    BNE delay_and_repeat
+
+    MOV R8, #0
+    B delay_and_repeat
+
+
+shift_right:
+
+    LSR R4, R4, #1
+    CMP R4, #1
+    BNE delay_and_repeat
+
+    MOV R8, #1
+
+
+delay_and_repeat:
+
+    LDR R1, =33333333
+    BL delay
+    B main_loop
+
+
+delay:
+
+    MOV R0, #0
+
+delay_loop:
+
+    ADD R0, R0, #1
+    CMP R0, R1
+    BLT delay_loop
+
+    MOV PC, LR
