@@ -86,7 +86,7 @@ void buttonInterruptHandler(void *instancePointer) {
 	if (btn1 == 1){dir = 2;}
 	if (btn2 ==1){dir = 1;}
 	if (btn3 == 1){dir = 0;}
-
+//change if statementst to if switch_data == 1...then ....
 	XGpio_InterruptClear(&input, 0xF); //Leave this line at the end of this function
 
 }
