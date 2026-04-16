@@ -43,6 +43,7 @@ uint32_t color = clrBlue;
 // uint32_t color;
 int switch_data; // button input data
 int mode = 0; // color switch
+int timertick = 0;
 
 //This function initalizes the GIC, including vector table setup and CPSR IRQ enable
 void initIntrSystem(XScuGic * IntcInstancePtr) {
@@ -57,7 +58,7 @@ void initIntrSystem(XScuGic * IntcInstancePtr) {
 }
 
 void timerInterruptHandler(void *userParam, u8 TmrCtrNumber) {
-
+	mode ++;
 	switch(mode){
 	case 0: color = clrPink; break;
 	case 1: color = clrCyan; break;
@@ -66,8 +67,9 @@ void timerInterruptHandler(void *userParam, u8 TmrCtrNumber) {
 
 	}
 
-
+	if (mode > 3){ mode = 0;}
 }
+
 
 //Weekly exercise - complete this function!
 void buttonInterruptHandler(void *instancePointer) {
@@ -111,7 +113,7 @@ int main() {
 	XScuGic_Enable (&GIC, TIMER_INT_ID );
 	XScuGic_SetPriorityTriggerType (&GIC, TIMER_INT_ID, 0x0, 0x3 );
 	XTmrCtr_SetOptions (&timer, 0, XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION);
-	XTmrCtr_SetResetValue (&timer, 0, 0xFFFFFFFF - 33333333); // 1 Hz
+	XTmrCtr_SetResetValue (&timer, 0, 0xFFFFFFFF - 66666666); // 1 Hz
 	XTmrCtr_Start(&timer, 0);
 
 
