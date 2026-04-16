@@ -20,11 +20,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <MyDisp.h>
+#define clrPink 0x00FFC0CBul
 
 //Defines for interrupt IDs
 #define INTC_DEVICE_ID XPAR_PS7_SCUGIC_0_DEVICE_ID
 #define GPIO_INT_ID XPAR_FABRIC_AXI_GPIO_0_IP2INTC_IRPT_INTR
 #define TIMER_INT_ID XPAR_FABRIC_AXI_TIMER_0_INTERRUPT_INTR
+
 
 //Global variables accessible from any function
 XTmrCtr timer;
@@ -37,6 +39,10 @@ static XScuGic GIC;
 int dir = 0; //0 = left, 1 = right, 2 = up, 3 = down
 
 uint32_t color = clrBlue;
+
+// uint32_t color;
+int switch_data; // button input data
+int mode = 0; // color switch
 
 //This function initalizes the GIC, including vector table setup and CPSR IRQ enable
 void initIntrSystem(XScuGic * IntcInstancePtr) {
@@ -52,6 +58,15 @@ void initIntrSystem(XScuGic * IntcInstancePtr) {
 
 void timerInterruptHandler(void *userParam, u8 TmrCtrNumber) {
 
+	switch(mode){
+	case 0: color = clrPink; break;
+	case 1: color = clrCyan; break;
+	case 2: color = clrMagenta; break;
+	case 3: color = clrGreen; break;
+
+	}
+
+
 }
 
 //Weekly exercise - complete this function!
@@ -59,6 +74,7 @@ void buttonInterruptHandler(void *instancePointer) {
 	//Read the button state using XGpio_DiscreteRead
 	//Set dir based on which bit is a '1'
 	switch_data = XGpio_DiscreteRead(&input,1);
+
 	int btn0 = (switch_data & 0x01); // down
 	int btn1 = (switch_data & 0x02); // up
 	int btn2 = (switch_data & 0x04); // right
@@ -68,9 +84,9 @@ void buttonInterruptHandler(void *instancePointer) {
 	if (btn1 == 1){dir = 2;}
 	if (btn2 ==1){dir = 1;}
 	if (btn3 == 1){dir = 0;}
-	
+
 	XGpio_InterruptClear(&input, 0xF); //Leave this line at the end of this function
-	
+
 }
 
 
@@ -85,7 +101,7 @@ int main() {
 	XGpio_SetDataDirection(&input, 1, 0xF); //1 = input, 0 = output
 
 	
-	
+
 
 	//Prelab Assignment 2
 	//Configure Timer and timer interrupt as done in class, and comment every line
@@ -117,27 +133,25 @@ int main() {
 	int cx = 120;
 	int cy = 160;
     int w = 20; 
-    
-    uint32_t color;
-    int switch_data; // button input data
-    int mode = 0; // color switch
-    int direct; // direction switch
-    
-	while (true) {
-		
-		
-		switch(mode){
-		case 0: color = clrPink; break;
-		case 1: color = clrCyan; break;
-		case 2: color = clrMagenta; break;
-		case 3: color = clrGreen; break;
+    int vx = 10;
+    int vy = 10;
 
+    
+
+
+
+	while (true) {
+
+		display.setForeground(color);
+		display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10); break;
+
+		if (dir == 3) {
+			cy -= 1;
 		}
-		
-		if (btn0 == 1){
-			cy -= cy;
-		}
-		
+
+		if (dir == 2){ cy += 1;}
+		if (dir == 1) {cx += 1;}
+		if (dir == 0) {cx -= 1;}
 	}
 
 }
