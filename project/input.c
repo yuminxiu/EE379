@@ -1,4 +1,5 @@
 
+XGpio input;
 
 void buttonInterruptHandler(void *instancePointer) {
 	//Read the button state using XGpio_DiscreteRead
