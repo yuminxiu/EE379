@@ -145,7 +145,7 @@ int main() {
 	while (true) {
 
 		display.setForeground(color);
-		display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10); break;
+		display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10);
 
 		if (dir == 3) {
 			cy -= 1;
