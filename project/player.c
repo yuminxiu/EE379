@@ -44,7 +44,7 @@ void update_player(struct Player *player){
 
 
 void player_move(struct Player *player, int dx){
-  pos->pos_x += dx;
+  player->pos_x += dx;
 
   // screen bounds
   if (player->pos_x < 0) {
