@@ -12,9 +12,9 @@ void init_bullet(struct Bullet *bullet){
   bullet->owner = 0;
 }
 
-void init_bullet_arr(struct bullet bullets[], int size){
+void init_bullet_arr(struct Bullet bullets[], int size){
   for (int i = 0; i < size; i++) {
-    init_bullet(&bullet[i]);
+    init_bullet(&bullets[i]);
   }
 }
 
@@ -37,10 +37,17 @@ void update_bullet(struct Bullet *bullet) {
   // screen bounds
 
   if (bullet->pos_x < 0 || bullet->pos_x > 319 || bullet->pos_y < 0 || bullet->pos_y > 239){
-    for (int i =0, i < size, i++){
-      update_bullet(&bullet[i]);
-      }
+
+    deactivate_bullet(bullet);
+  }
 }
+
+void update_bullet_arr(struct Bullet bullets[], int size){
+    for (int i =0; i < size; i++){
+      update_bullet(&bullets[i]);
+      }
+  }
+
 
 void spawn_bullet(struct Bullet bullets[], int size,
                   int x, int y,
