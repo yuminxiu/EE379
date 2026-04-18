@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-#define max_bullets 20 // value can be changed later
+#define MAX_BULLETS 20 // value can be changed later
 
 struct Bullet {
   int pos_x;
@@ -20,7 +20,7 @@ struct Bullet {
 };
 
 void init_bullet(struct Bullet *bullet);
-void init_bullet_arr(struct bullet bullets[], int size); //initializes bullets in an array instead of dynamically creating bullets
+void init_bullet_arr(struct Bullet bullets[], int size); //initializes bullets in an array instead of dynamically creating bullets
 
 void update_bullet(struct Bullet *bullet);
 void bullet_move(struct Bullet *bullet);
