@@ -57,14 +57,17 @@ void player_move(struct Player *player, int dx){
 }
 
 
-void player_shoot(struct Player *player){
+void player_shoot(struct Player *player, struct Bullet bullets[], int max_bullets){
 
   if (!player->can_shoot){
     return;
   }
 
-// call bullet spawn
-// spawn_bullet(...);
+// normal shot
+  spawn_bullet(bullets, max_bullets, player->pos_x, player->pos_y, 0, -4, 0, 0); // values to be adjusted
+// spawns bullet at player pos w/o horizontal motion, only up. type 0, owner 0
+  
+  // other shot types to be added later
 
 
   player->can_shoot = false;
