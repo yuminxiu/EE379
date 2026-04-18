@@ -28,7 +28,7 @@ void update_bullet_arr(struct Bullet bullets[], int size); // loops through bull
 
 void deactivate_bullet(struct Bullet *bullet); // marks a slot as unused
 
-void spawn_bullet(struct Bullet bullet[], int size, int x, int y, int dx, int dy
+void spawn_bullet(struct Bullet bullet[], int size, int x, int y, int dx, int dy,
                   int type, int owner);   // finds inactive slot in array and activates it
 
 #endif
