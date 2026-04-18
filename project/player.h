@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <stdbool.h>
+#include "bullet.h"
 
 struct Player {
   int lives;
@@ -21,6 +22,5 @@ struct Player {
 void init_player(struct Player *player);
 void update_player(struct Player *player);
 void player_move(struct Player *player, int dx);
-void player_shoot(struct Player *player);
-
+void player_shoot(struct Player *player, struct Bullet bullets[], int max_bullets);
 #endif
