@@ -118,4 +118,28 @@ struct game_state {
  struct Timers timers;
 };
 
+struct Animation {
+  int frame;
+  int frame_count;
+  int frame_delay;
+  int timer;
+};
 
+struct Sprite {
+  int frame_w;
+  int frame_h;
+  int frame_count;
+  const char *f; // point to file name or identifier
+};
+
+struct Animated_Sprite {
+  struct Sprite *sprite;
+  struct Animation ani;
+};
+
+struct Rect {  // hitbox needed for collisions
+    int x;
+    int y;
+    int width;
+    int height;
+};
