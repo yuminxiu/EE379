@@ -51,8 +51,8 @@ void player_move(struct Player *player, int dx){
     player->pos_x = 0;
   }
 
-  if (player->pos_x > 319){
-    player->pos_x = 319;
+  if (player->pos_x > 239){
+    player->pos_x = 239;
   }
 }
 
