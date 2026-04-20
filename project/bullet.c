@@ -36,7 +36,7 @@ void update_bullet(struct Bullet *bullet) {
 
   // screen bounds
 
-  if (bullet->pos_x < 0 || bullet->pos_x > 319 || bullet->pos_y < 0 || bullet->pos_y > 239){
+  if (bullet->pos_x < 0 || bullet->pos_x > 239 || bullet->pos_y < 0 || bullet->pos_y > 319){
 
     deactivate_bullet(bullet);
   }
