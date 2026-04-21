@@ -15,7 +15,6 @@ struct PowerUp {
   int dy;
 
   int despawn_timer;
-  int spawn_timer;
 
   bool landed; //stay on bottom edge of screen until despawn or collision with player
 };
