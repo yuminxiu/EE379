@@ -2,6 +2,7 @@
 #define BOSS_H
 
 #include <stdbool.h>
+#include "bullet.h"
 
 struct Boss {
   bool active;
