@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 
+#define MAX_POWERUPS 5 // value to be adjusted later
 
 struct PowerUp {
   bool active;
@@ -23,6 +24,10 @@ void init_powerup(struct PowerUp *p);
 void update_powerup(struct PowerUp *p);
 void powerup_move(struct PowerUp *p);
 void deactivate_powerup(struct PowerUp *p);
+
+void init_powerup_arr(struct PowerUp powerups[], int size);
+void update_powerup_arr(struct PowerUp powerups[], int size);
+void spawn_powerup(struct PowerUp powerups[], int size, int x, int y, int type, int dy, int despawn_timer);
 
 #endif
 
