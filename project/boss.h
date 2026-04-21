@@ -7,7 +7,7 @@
 struct Boss {
   bool active;
   int hp;
-  int max_health;
+  int max_hp;
   int pattern_timer;
   int width;
   int height;
