@@ -3,7 +3,7 @@
 //Boss initialization
 
 void init_boss(struct Boss *boss) { 
-  boss->active = false;
+  boss->active = false; //inactive
   boss-> hp = 100;
   boss-> max_hp = 100;
  
