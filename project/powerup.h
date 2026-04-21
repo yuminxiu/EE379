@@ -22,6 +22,7 @@ struct PowerUp {
 void init_powerup(struct PowerUp *p);
 void update_powerup(struct PowerUp *p);
 void powerup_move(struct PowerUp *p);
+void deactivate_powerup(struct PowerUp *p);
 
 #endif
 
