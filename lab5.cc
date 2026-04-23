@@ -67,7 +67,7 @@ void timerInterruptHandler(void *userParam, u8 TmrCtrNumber) {
 
 	}
 
-	if (mode > 3){ mode = 0;}
+	mode =  (mode +1) % 4;
 }
 
 
@@ -77,15 +77,11 @@ void buttonInterruptHandler(void *instancePointer) {
 	//Set dir based on which bit is a '1'
 	switch_data = XGpio_DiscreteRead(&input,1);
 
-	int btn0 = (switch_data & 0x01); // down
-	int btn1 = (switch_data & 0x02); // up
-	int btn2 = (switch_data & 0x04); // right
-	int btn3 = (switch_data & 0x08); // up
+	if (switch_data & 0x01) dir = 3; // down
+    else if (switch_data & 0x02) dir = 2; // up
+    else if (switch_data & 0x04) dir = 1; // right
+    else if (switch_data & 0x08) dir = 0; // left
 	
-	if (btn0 == 1){ dir = 3;}
-	if (btn1 == 1){dir = 2;}
-	if (btn2 ==1){dir = 1;}
-	if (btn3 == 1){dir = 0;}
 //change if statementst to if switch_data == 1...then ....
 	XGpio_InterruptClear(&input, 0xF); //Leave this line at the end of this function
 
@@ -144,16 +140,25 @@ int main() {
 
 	while (true) {
 
-		display.setForeground(color);
+		display.setForeground(clrWhite);
 		display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10);
 
 		if (dir == 3) {
-			cy -= 1;
+			cy -= 2;
 		}
 
-		if (dir == 2){ cy += 1;}
-		if (dir == 1) {cx += 1;}
-		if (dir == 0) {cx -= 1;}
+		if (dir == 2){ cy += 2;}
+		if (dir == 1) {cx += 2;}
+		if (dir == 0) {cx -= 2;}
+
+		if (cx < 10) cx = 10;
+    	if (cx > 310) cx = 310;
+		if (cy > 230) cy = 230;
+
+		display.setForeground(color);
+    	display.drawRectangle(true, cx-10, cy-10, cx+10, cy+10);
+
+    	usleep(50000)
 	}
 
 }
