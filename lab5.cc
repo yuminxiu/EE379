@@ -60,10 +60,10 @@ void initIntrSystem(XScuGic * IntcInstancePtr) {
 void timerInterruptHandler(void *userParam, u8 TmrCtrNumber) {
 	mode ++;
 	switch(mode){
-	case 0: color = clrPink; break;
-	case 1: color = clrCyan; break;
-	case 2: color = clrMagenta; break;
-	case 3: color = clrGreen; break;
+	case 0: color = clrPink;
+	case 1: color = clrCyan; 
+	case 2: color = clrMagenta; 
+	case 3: color = clrGreen; 
 
 	}
 
