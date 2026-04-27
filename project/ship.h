@@ -18,7 +18,7 @@ struct Ship {
 void init_ship(struct Ship *s);
 void update_ship(struct Ship *s);
 void ship_move(struct Ship *s);
-void spawn_ship(struct Ship *s);
+void spawn_ship(struct Ship *s, int direction);
 
 #endif
 
