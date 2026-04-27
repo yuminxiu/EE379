@@ -1,12 +1,12 @@
 #include "player.h"
-
+#include "constants.h"
 // Player Initialization
 
 void init_player(struct Player *player){
   player->lives = 3;
 
   player->pos_x = 120;
-  player->pos_y = 220;
+  player->pos_y = player_start_y;
 
   player->can_shoot = true;
   player->shoot_timer = 0;
@@ -22,7 +22,7 @@ void update_player(struct Player *player){
   if(!player->can_shoot){
     player->shoot_timer--;
 
-    if (player->shoot_timer <=0){
+    if (player->shoot_timer <=player_shoot_cooldown){
         player->can_shoot = true;
         player->shoot_timer = 0;
     }
@@ -47,12 +47,12 @@ void player_move(struct Player *player, int dx){
   player->pos_x += dx;
 
   // screen bounds
-  if (player->pos_x < 0) {
-    player->pos_x = 0;
+  if (player->pos_x < sreen_width) {
+    player->pos_x = screen_width;
   }
 
-  if (player->pos_x > 239){
-    player->pos_x = 239;
+  if (player->pos_x > screen_width){
+    player->pos_x = screen_width;
   }
 }
 
