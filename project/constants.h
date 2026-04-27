@@ -57,6 +57,11 @@
 #define PLAYER_BULLET_SPEED -4 // place holder
 #define ENEMY_BULLET_SPEED 2 //placeholder
 
+// HITBOXES
+
+#define PLAYER_HITBOX_WIDTH 16 // placehodler
+#define BOSS_HITBOX_WIDTH 16 // placeholder
+
 // POWERUPS
 
 #define POWERUP_WIDTH 12 //place holder
