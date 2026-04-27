@@ -1,4 +1,5 @@
 #include "powerup.h"
+#include "constants.h"
 
 void init_powerup(struct Powerup *p) {
     p->active = false;
