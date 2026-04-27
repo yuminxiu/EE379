@@ -1,4 +1,5 @@
 #include "boss.h"
+#include "constants.h"
 
 //Boss initialization
 
@@ -10,12 +11,12 @@ void init_boss(struct Boss *boss) {
   boss-> pattern_timer = 0;
   boss-> pattern_state = 0;
 
-  boss-> width = 64;
-  boss-> height =32;
+  boss-> width = boss_width;
+  boss-> height = boss_height;
 
   boss->pos_x =88;
   boss->pos_y = 40;
-  boss->dx = 1;
+  boss->dx = boss_speed;
   boss->dy = 0;
 } // all values will be adjusted later
 
@@ -28,8 +29,8 @@ void move_boss(struct Boss *boss) {
     boss->pos_x += boss->dx;
     boss->pos_y += boss->dy;
 
-    if(boss->pos_x + boss->width >=240){
-      boss->pos_x = 240 - boss->width;
+    if(boss->pos_x + boss->width >= screen_width){
+      boss->pos_x = screen_width - boss->width;
       boss->dx =-1;
     }
 }
