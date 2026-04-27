@@ -72,7 +72,7 @@
 
 // game limits
 
-#define mAX_BULLETS 20 // place holder
+#define MAX_BULLETS 20 // place holder
 #define MAX_POWERUPS 5
 
 // TIMING
