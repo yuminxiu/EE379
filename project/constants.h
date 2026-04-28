@@ -70,6 +70,18 @@
 
 #define POWERUP_DESPAWN_TIME 300 // frames
 
+#define POWERUP_NONE        0
+#define POWERUP_EXTRA_LIFE  1
+#define POWERUP_SCORE_MULT  2
+#define POWERUP_LASER       3
+#define POWERUP_SHIELD      4
+#define POWERUP_TRIPLE_SHOT 5
+
+#define SCORE_MULT_TIME   600
+#define LASER_TIME        300
+#define SHIELD_TIME       600
+#define TRIPLE_SHOT_TIME  450
+
 // game limits
 
 #define MAX_BULLETS 20 // place holder
