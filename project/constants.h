@@ -57,6 +57,18 @@
 #define PLAYER_BULLET_SPEED -4 // place holder
 #define ENEMY_BULLET_SPEED 2 //placeholder
 
+// Bullet types
+
+#define BULLET_NORMAL 0
+#define BULLET_LASER 1
+#define BULLET_PIERCE 2
+
+// OWNERS
+
+#define OWNER_PLAYER 0
+#define OWNER_ALIEN 1
+#define OWNER_BOSS 2
+
 // HITBOXES
 
 #define PLAYER_HITBOX_WIDTH 16 // placehodler
