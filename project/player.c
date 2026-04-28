@@ -22,18 +22,18 @@ void update_player(struct Player *player){
   if(!player->can_shoot){
     player->shoot_timer--;
 
-    if (player->shoot_timer <=player_shoot_cooldown){
+    if (player->shoot_timer <= 0){
         player->can_shoot = true;
         player->shoot_timer = 0;
     }
   }
 
 
-  if (player->power_type !=0) {
+  if (player->power_type != POWERUP_NONE) {
     player->power_timer--;
   
     if (player->power_timer <=0){
-      player->power_type = 0;
+      player->power_type = POWERUP_NONE;
       player->power_timer = 0;
     }
   }
