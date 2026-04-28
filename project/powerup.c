@@ -55,3 +55,36 @@ void update_powerup(struct PowerUp *p) {
 
 // need to add an array to store powerups
 // types need to be declared and defined
+
+void apply_powerup(struct PowerUp *p, struct Player *player){
+    if(!p->active){
+        return;
+    }
+
+    switch(p->type) {
+        case POWERUP_EXTRA_LIFE:
+                player->lives +=1;
+                break;
+        case POWERUP_SCORE_MULT:
+            player->power_type = POWERUP_SCORE_MULT;
+            player->power_timer = SCORE_MULT_TIME;
+            break;
+        
+        case POWERUP_LASER:
+            player->power_type = POWERUP_LASER;
+            player->power_timer = LASER_TIME;
+            break;
+        
+        case POWERUP_SHIELD:
+            player->power_type = POWERUP_SHIELD;
+            player-> power_timer = SHIELD_TIME;
+            break;
+        
+        case POWERUP_TRIPLE_SHOT:
+            player->power_type = POWERUP_TRIPLE_SHOT;
+            player->power_timer = TRIPLE_SHOT_TIME;
+            break;
+    }
+
+    deactivate_powerup(p);
+}
