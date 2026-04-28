@@ -63,12 +63,18 @@ void player_shoot(struct Player *player, struct Bullet bullets[], int max_bullet
     return;
   }
 
-// normal shot
-  spawn_bullet(bullets, max_bullets, player->pos_x, player->pos_y, 0, -4, 0, 0); // values to be adjusted
-// spawns bullet at player pos w/o horizontal motion, only up. type 0, owner 0
   
-  // other shot types to be added later
+  if (player->power_type == POWERUP_TRIPLE_SHOT) {
+  }
 
+  else if (player->power_type == POWERUP_LASER) {
+  }
+
+  else {
+    // normal shot
+  spawn_bullet(bullets, max_bullets, player->pos_x, player->pos_y, 0, PLAYER_BULLET_SPEED, BULLET_NORMAL, OWNER_PLAYER); // values to be adjusted
+// spawns bullet at player pos w/o horizontal motion, only up. type 0, owner 0
+  }
 
   player->can_shoot = false;
   player->shoot_timer = 10; // random value that'll probably be changed later
