@@ -2,6 +2,7 @@
 #define POWERUP_H
 
 #include <stdbool.h>
+#include "player.h"
 
 #define MAX_POWERUPS 5 // value to be adjusted later
 
@@ -28,6 +29,7 @@ void deactivate_powerup(struct PowerUp *p);
 void init_powerup_arr(struct PowerUp powerups[], int size);
 void update_powerup_arr(struct PowerUp powerups[], int size);
 void spawn_powerup(struct PowerUp powerups[], int size, int x, int y, int type, int dy, int despawn_timer);
+void apply_powerup(struct Powerup *p, struct Player *player);
 
 #endif
 
