@@ -53,9 +53,6 @@ void update_powerup(struct PowerUp *p) {
   }
 }
 
-// need to add an array to store powerups
-// types need to be declared and defined
-
 void apply_powerup(struct PowerUp *p, struct Player *player){
     if(!p->active){
         return;
