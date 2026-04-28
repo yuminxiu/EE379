@@ -1,4 +1,5 @@
-# include "bullet.h"
+#include "bullet.h"
+#include "constants.h"
 
 // Bullet Initialization
 
