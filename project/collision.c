@@ -34,5 +34,36 @@ struct Rect bullet_rect(struct Bullet *bullet){
 
 }
 
+  struct Rect alien_rect(struct Alien *alien) {
+    struct Rect r;
+
+    r.x = alien->pos_x;
+    r.y = alien->pos_y;
+    r.width = ALIEN_WIDTH;
+    r.height = ALIEN_HEIGHT;
+
+    return r;
+  }
+
+struct Rect boss_rect(struct Boss *boss){
+  struct Rect r;
+
+  r.x = boss->pos_x;
+  r.y = boss->pos_y;
+  r.width = BOSS_WIDTH;
+  r.height = BOSS_HEIGHT;
+
   return r;
 }
+
+struct Rect ship_rect(struct Ship *s){
+  struct Rect r;
+  r.x = s->pos_x;
+  r.y = s->pos_y;
+  r.width = SHIP_WIDTH;
+  r.height = SHIP_HEIGHT;
+
+  return r;
+}
+
+
