@@ -27,3 +27,5 @@ void init_alien(struct Alien *alien);
 void move_alien(struct Alien *alien, struct Alien_Formation *f);
 void update_alien(struct Alien *alien, struct Alien_Formation *f);
 void alien_shoot(struct Alien *alien, struct Bullet bullets[], int max_bullets);
+
+#endif
