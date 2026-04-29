@@ -2,6 +2,7 @@
 #define ALINE_H
 
 #include <stdbool.h>
+#include "bullets.h"
 
 #define MAX_ALIENS 18 // 3 rows of 6
 
@@ -22,3 +23,7 @@ struct Alien_Formation {
   int step_down;
 };
 
+void init_alien(struct Alien *alien);
+void move_alien(struct Alien *alien, struct Alien_Formation *f);
+void update_alien(struct Alien *alien, struct Alien_Formation *f);
+void alien_shoot(struct Alien *alien, struct Bullet bullets[], int max_bullets);
