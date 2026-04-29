@@ -42,7 +42,7 @@ void update_alien_arr(struct Alien aliens[], int size, struct Alien_Formation *f
 
   for (int i = 0; i < size; i++){ // checking if next move would hit either side
     if (!aliens-[i].active){
-      continue;
+      continue; // skips dead aliens
     }
 
     int next_x = aliens[i].pos_x + f->direction * f->speed;
