@@ -1,5 +1,5 @@
 #ifndef ALIEN_H
-#define ALINE_H
+#define ALIEN_H
 
 #include <stdbool.h>
 #include "bullets.h"
