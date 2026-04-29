@@ -66,4 +66,13 @@ struct Rect ship_rect(struct Ship *s){
   return r;
 }
 
+struct Rect powerup_rect(struct PowerUp *p){
+  struct Rect r;
 
+  r.x = p->pos_x;
+  r.y = p->pos_y;
+  r.width = POWERUP_WIDTH;
+  r.height = POWERUP_HEIGHT;
+
+  return r;
+}
