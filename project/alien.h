@@ -25,10 +25,11 @@ struct Alien_Formation {
 
 void init_alien(struct Alien *alien);
 void init_alien_arr(struct Alien aliens[], int size);
+void init_alien_formation(struct Alien_Formation *f);
+
 void update_alien_arr(struct Alien aliens[], int size, struct Alien_Formation *f);
-void update_alien(struct Alien *alien, struct Alien_Formation *f);
 void alien_shoot(struct Alien *alien, struct Bullet bullets[], int max_bullets);
 
 void move_alien(struct Alien *alien, struct Alien_Formation *f); // not currently used
-
+void update_alien(struct Alien *alien, struct Alien_Formation *f); // not currently used
 #endif
