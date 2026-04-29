@@ -78,7 +78,7 @@
 
 #define POWERUP_WIDTH 12 //place holder
 #define POWERUP_HEIGHT 12 //place holder
-#define POWEUP_SPEED 1 // placeholder
+#define POWERUP_SPEED 1 // placeholder
 
 #define POWERUP_DESPAWN_TIME 300 // frames
 
