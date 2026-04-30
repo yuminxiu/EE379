@@ -19,7 +19,7 @@ void add_score(struct Score_Sys *sc, struct Player *player, int points){
   sc ->current_score = 0;
 
   if(player->power_type = POWER_UP_SCORE_MULT){
-    points *= score_mult;
+    points *= SCORE_MULT;
   }
 
   sc->current_score += points
