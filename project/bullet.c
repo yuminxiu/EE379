@@ -11,6 +11,8 @@ void init_bullet(struct Bullet *bullet){
   bullet->active = false;
   bullet->type = 0;
   bullet->owner = 0;
+  bullet-> bounce_count = 0;
+  bullet-> life_timer = 0;
 }
 
 void init_bullet_arr(struct Bullet bullets[], int size){
@@ -33,9 +35,7 @@ void update_bullet(struct Bullet *bullet) {
       return;
   }
 
-  bullet_move(bullet);
 
-  // screen bounds
   if (bullet->type == BULLET_BURST) {
     bullet->pos_x += bullet->dx;
     bullet->pos_y += bullet->dy;
@@ -58,6 +58,9 @@ void update_bullet(struct Bullet *bullet) {
 
     return;
 }
+
+  bullet_move(bullet);
+  
   if (bullet->pos_x < 0 || bullet->pos_x > screen_width || bullet->pos_y < 0 || bullet->pos_y > screen_height){
 
     deactivate_bullet(bullet);
@@ -87,7 +90,7 @@ void spawn_bullet(struct Bullet bullets[], int size,
             bullets[i].owner = owner;
             bullets[i].active = true;
             bullets[i].bounce_count = 0;
-            bullets[i].life_timer = 180;
+            bullets[i].life_timer = 0;
 
           if (type == BULLET_LASER){
               bullets[i].dx= 0;
@@ -96,6 +99,10 @@ void spawn_bullet(struct Bullet bullets[], int size,
 
           if (type == BULLET_PIERCE) {
               bullets[i].dy = PLAYER_BULLET_SPEED;
+          }
+
+          if 9type == BULLET_BURSt){
+            bullets[i].life_timer = 180;
           }
             return;
         }
