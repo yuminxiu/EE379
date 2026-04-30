@@ -66,7 +66,7 @@ void update_input(struct Input *input){
 
 
 
-// TAKEN FROM LAB 5. UNSURE IF NEEDED AT ALL
+// TAKEN FROM LAB 5. UNSURE IF NEEDED AT ALL, BUT MAY NEED IF UART ISNT ALREADY ENABLED ON THE BOARD
 XGpio input;
 
 void buttonInterruptHandler(void *instancePointer) {
