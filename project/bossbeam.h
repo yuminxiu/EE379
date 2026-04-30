@@ -15,6 +15,12 @@ struct BossBeam{
   int fire_timer;
 };
 
-void init_boss_beam(struct BossBeam *t);
-void init_boss_beam_arr(struct BossBeam beams[], int max_beams);
-void beam_cage(struct BossBeam beams
+void init_boss_beam(struct BossBeam *b);
+void init_boss_beam_arr(struct BossBeam beams[], int size);
+void beam_cage(struct BossBeam beams[], int size);
+void update_boss_beam(struct BossBeam *beam);
+void update_boss_beam_arr(struct BossBeam beams[], int size);
+
+void deactivate_boss_beam(struct BossBeam *beam);
+
+#endif
