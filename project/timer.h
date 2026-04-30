@@ -19,9 +19,14 @@ struct Timer {
   int pattern_state;
 };
 
-void
-void
-void
-void
+void init_timer(struct Timer *timer);
+void init_timer_arr(struct Timer seconds[], int size);
+
+void update_timer(struct Timer *timer);
+void update_timer_arr(struct Timer seconds[], int size);
+
+void deactivate_timer(struct Timer *timer);
+
+void activate_timer(struct Timer seconds[], int size, int x, int y, int dx, int dy, int type, int owner);
 
 #endif
