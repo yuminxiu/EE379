@@ -1,7 +1,7 @@
 #include "boss.h"
 #include "constants.h"
 
-#define SPIRAL_STEPS 8
+#define SPIRAL_STEPS 16
 static int spiral_dx[SPIRAL_STEPS] = { 0, 1, 2, 3, 2, 1, 0, -1, -2, -3, -2, -1, 0, 1, 2, 3};
 static int spiral_dy[SPIRAL_STEPS] = { 3, 3, 2, 1, 0, -1, -2, -3, -3, -3, -2, -1, 0, 1, 2, 3};
 
@@ -15,8 +15,8 @@ void init_boss(struct Boss *boss) {
   boss-> pattern_timer = 0;
   boss-> pattern_state = 0;
 
-  boss-> width = boss_width;
-  boss-> height = boss_height;
+  boss-> width = BOSS_WIDTH;
+  boss-> height = BOSS_HEIGHT;
 
   boss->pos_x =88;
   boss->pos_y = 40;
@@ -33,8 +33,8 @@ void move_boss(struct Boss *boss) {
     boss->pos_x += boss->dx;
     boss->pos_y += boss->dy;
 
-    if(boss->pos_x + boss->width >= screen_width){
-      boss->pos_x = screen_width - boss->width;
+    if(boss->pos_x + boss->width >= ){
+      boss->pos_x = SCREEN_WIDTH - boss->width;
       boss->dx =-1;
     }
 }
@@ -58,15 +58,6 @@ void boss_shoot_spread(struct Boss *boss, struct Bullet bullets[], int max_bulle
     spawn_bullet(bullets, max_bullets, x, y,  2, ENEMY_BULLET_SPEED, BULLET_NORMAL, OWNER_BOSS);
 }
 
-void boss_shoot_spiral(struct Boss *boss, struct Bullet bullets[], int max_bullets) {
-
-    int index = boss->timer_pattern % SPIRAL_STEPS // slows rotation, cycles through directions
-
-    int x = boss->pos_x + boss->width / 2;
-    int y = boss->pos_y + boss->height / 2;
-
-    spawn_bullet(bullets, max_bullets, x, y, spiral_dx[index], spiral_dy[index], BULLET_NORMAL, OWNER_BOSS);
-}
 
 void boss_shoot_multispiral(struct Boss *boss, struct Bullet bullets[], int max_bullets) {
 
@@ -107,11 +98,7 @@ void boss_shoot(struct Boss *boss, struct Bullet bullets[], int max_bullets){
     break;
 
     case BOSS_PATTERN_SPIRAL:
-      boss_shoot_spiral(boss, bullets, max_bullets);
-    break;
-
-    case BOSS_PATTERN_MULTISPIRAL:
-      bosss_shoot_multispiral(boss, bullets, max_bullets);
+      boss_shoot_multispiral(boss, bullets, max_bullets);
     break;
 
     case BOSS_PATTERN_BURST:
