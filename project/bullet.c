@@ -101,7 +101,7 @@ void spawn_bullet(struct Bullet bullets[], int size,
               bullets[i].dy = PLAYER_BULLET_SPEED;
           }
 
-          if 9type == BULLET_BURSt){
+          if (type == BULLET_BURST){
             bullets[i].life_timer = 180;
           }
             return;
