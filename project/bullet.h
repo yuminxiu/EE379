@@ -17,6 +17,9 @@ struct Bullet {
   int type; // normal, spread, beam, cluster
   int owner; // player, alien, boss
 
+  int bounce_count;
+  int life_timer;
+
 };
 
 void init_bullet(struct Bullet *bullet);
