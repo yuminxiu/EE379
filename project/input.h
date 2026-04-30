@@ -6,6 +6,8 @@
 struct Input{
   bool left;
   bool right;
+  bool up;
+  bool down;
   bool shoot;
   bool pause;
   bool restart;
