@@ -95,8 +95,7 @@ void boss_shoot(struct Boss *boss, struct Bullet bullets[], int max_bullets){
 
   switch (boss->pattern_state){
     case BOSS_PATTERN_STRAIGHT:
-  spawn_bullet(bullets, max_bullets, boss->pos_x + boss->width/2, boss->pos_y + boss->height,
-      0, 2, 0, 2); //single bullet from center
+    boss_shoot_straight(boss,bullets,max_bullets);
     break;
 
     case BOSS_PATTERN_SPREAD:
