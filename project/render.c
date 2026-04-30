@@ -25,3 +25,5 @@ void render_game((struct Game_State *game, struct Player *player, struct PowerUp
     draw_powerups(powerups, max_powerups);
     draw_ui(player, sc, game);
 }
+
+// not finished
