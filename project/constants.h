@@ -105,7 +105,7 @@
 
 // game limits
 
-#define MAX_BULLETS 20 // place holder
+#define MAX_BULLETS 64
 #define MAX_POWERUPS 5
 
 // TIMING
@@ -125,6 +125,6 @@
 #define SHIP_POINTS 50
 #define BOSS_POINTS 500
 
-#define SCORE_MULT
+#define SCORE_MULT 2.5
 
 #endif
