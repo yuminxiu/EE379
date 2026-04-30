@@ -70,6 +70,7 @@
 #define BULLET_LASER 1
 #define BULLET_PIERCE 2
 #define BULLET_ROUND 3
+#define BULLET_BURST 4
 
 // OWNERS
 
