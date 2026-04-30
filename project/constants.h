@@ -37,6 +37,12 @@
 #define BOSS_START_Y 20 // placeholder
 #define BOSS_SPEED 1 // placeholder
 
+#define BOSS_PATTERN_STRAIGHT 0
+#define BOSS_PATTERN_SPREAD 1
+#define BOSS_PATTERN_SPIRAL 2
+#define BOSS_PATTERN_TRACK 3
+#define BOSS_PATTERN_BURST 4
+
 // PLAYER
 
 #define PLAYER_WIDTH 16 //placeholder
