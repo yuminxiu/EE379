@@ -3,7 +3,7 @@
 
 #include "xscugic.h"
 #include "xtmrctr.h"
-#include "xil_types.h"
+#include "xparameters.h"
 
 
 #define TIMER_INT_ID  XPAR_FABRIC_AXI_TIMER_0_INTERRUPT_INTR
