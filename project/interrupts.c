@@ -2,7 +2,7 @@
 #include "xparameters.h"
 #include "xil_exception.h"
 
-static XScuGic GIC;
+XScuGic GIC;
 
 void initIntrSystem(XScuGic * IntcInstancePtr) {
 
