@@ -17,7 +17,7 @@ struct BossBeam{
 
 void init_boss_beam(struct BossBeam *b);
 void init_boss_beam_arr(struct BossBeam beams[], int size);
-void beam_cage(struct BossBeam beams[], int size);
+void start_beam_cage(struct BossBeam beams[], int size);
 void update_boss_beam(struct BossBeam *beam);
 void update_boss_beam_arr(struct BossBeam beams[], int size);
 
