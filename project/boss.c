@@ -1,10 +1,11 @@
 #include "boss.h"
 #include "constants.h"
 
-//Boss initialization
+#define SPIRAL_STEPS 8
+static int spiral_dx[SPIRAL_STEPS] = { 0, 1, 2, 3, 2, 1, 0, -1, -2, -3, -2, -1, 0, 1, 2, 3};
+static int spiral_dy[SPIRAL_STEPS] = { 3, 3, 2, 1, 0, -1, -2, -3, -3, -3, -2, -1, 0, 1, 2, 3};
 
-static int spiral_dx[8] = { 0, 1, 2, 1, 0, -1, -2, -1 };
-static int spiral_dy[8] = { 2, 2, 1, 0, -1, 0, 1, 2 };
+//Boss initialization
 
 void init_boss(struct Boss *boss) { 
   boss->active = false; //inactive
@@ -59,7 +60,7 @@ void boss_shoot_spread(struct Boss *boss, struct Bullet bullets[], int max_bulle
 
 void boss_shoot_spiral(struct Boss *boss, struct Bullet bullets[], int max_bullets) {
 
-    int index = (boss->timer_pattern / 5) % 8; // slows rotation, cycles through directions
+    int index = boss->timer_pattern % SPIRAL_STEPS // slows rotation, cycles through directions
 
     int x = boss->pos_x + boss->width / 2;
     int y = boss->pos_y + boss->height / 2;
@@ -69,18 +70,18 @@ void boss_shoot_spiral(struct Boss *boss, struct Bullet bullets[], int max_bulle
 
 void boss_shoot_multispiral(struct Boss *boss, struct Bullet bullets[], int max_bullets) {
 
-    int base = (boss->timer_pattern / 4) % 8;
+    int base = boss->timer_pattern % SPIRAL_STEPS;
 
     int x = boss->pos_x + boss->width / 2;
     int y = boss->pos_y + boss->height / 2;
 
-    // Spiral 1 (clockwise)
+    // Spiral 1
     spawn_bullet(bullets, max_bullets, x, y, spiral_dx[base], spiral_dy[base], BULLET_NORMAL, OWNER_BOSS);
 
-    // Spiral 2 (counter-clockwise)
-    int reverse = (8 - base) % 8;
+    // Spiral 2 (offset half rotation)
+    int offset = (base + SPIRAL_STEPS / 2) % SPIRAL_STEPS;
 
-    spawn_bullet(bullets, max_bullets, x, y, spiral_dx[reverse], spiral_dy[reverse], BULLET_NORMAL, OWNER_BOSS);
+    spawn_bullet(bullets, max_bullets, x, y, spiral_dx[offset], spiral_dy[offset],BULLET_NORMAL, OWNER_BOSS);
 }
 
 void boss_shoot(struct Boss *boss, struct Bullet bullets[], int max_bullets){
