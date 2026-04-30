@@ -1,4 +1,72 @@
+#include "input.h"
+#include "xil_printf.h"
+#include "xuartps.h"
+#include "xparameters.h"
 
+extern XUartPs Uart_PS;
+
+void init_input(struct Input *input){
+	input->left = false;
+	input->right = false;
+	input->up = false;
+	input->down = false;
+	input->shoot = false;
+	input->pause = false;
+	input->restart = false;
+	input->key_pressed = 0;
+}
+
+void update_input(struct Input *input){
+	input->left = false;
+	input->right = false;
+	input->up = false;
+	input->down = false;
+	input->shoot = false;
+	input->pause = false;
+	input->restart = false;
+	input->key_pressed = 0;
+
+	if (XUartPs_IsReceiveData(XPAR_PS7_UART_1_BASEADDR)) {
+        char c = XUartPs_ReadReg(XPAR_PS7_UART_1_BASEADDR, XUARTPS_FIFO_OFFSET);
+
+        input->key_pressed = c;
+
+		if ( c == 'a' || c == 'A'){
+				input->left = true;
+		}
+		else if (c == 'd' || c =='D'){
+			input->right = true;
+		}
+
+		else if (c == 'w' || c == 'W'){
+			input->up = true;
+		}
+
+		else if (c =='s' || c == 'S'){
+			input->down = true;
+		}
+
+		else if (c == ' '){
+			input->shoot = true;
+		}
+
+		else if (c == 'p' || c == 'P'){
+			input->pause = true;
+		}
+
+		else if (c == 'k' || c == 'K'){
+			input->restart = true;
+		}
+	}
+}
+
+
+
+
+
+
+
+// TAKEN FROM LAB 5. UNSURE IF NEEDED AT ALL
 XGpio input;
 
 void buttonInterruptHandler(void *instancePointer) {
