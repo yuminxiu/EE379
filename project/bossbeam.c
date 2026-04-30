@@ -20,7 +20,7 @@ void init_boss_beam_arr(struct BossBeam beams[], int size){
     init_boss_beam(&beams[i]);
   }
 
-void deactivate_boss_beam(struct BossBeam *beam){
+void deactivate_boss_beam(struct BossBeam *b){
   b->active = false;
   b->firing = false;
   b->warning_timer = 0;
@@ -65,7 +65,7 @@ void start_beam_cage(struct BossBeam beams[], int size){
   }
 }
 
-void update_boss_beam(struct BossBeam *beam){
+void update_boss_beam(struct BossBeam *b){
   if (!b->active){
     return;
   }
