@@ -6,7 +6,7 @@ void init_player(struct Player *player){
   player->lives = 3;
 
   player->pos_x = 120;
-  player->pos_y = player_start_y;
+  player->pos_y = PLAYER_START_Y;
 
   player->can_shoot = true;
   player->shoot_timer = 0;
@@ -55,12 +55,12 @@ void player_move(struct Player *player, int dx){
   player->pos_x += dx;
 
   // screen bounds
-  if (player->pos_x < sreen_width) {
-    player->pos_x = screen_width;
+  if (player->pos_x < SCREEN_WIDTH) {
+    player->pos_x = SCREEN_WIDTH;
   }
 
-  if (player->pos_x > screen_width){
-    player->pos_x = screen_width;
+  if (player->pos_x > SCREEN_WIDTH){
+    player->pos_x = SCREEN_WIDTH;
   }
 }
 
