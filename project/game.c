@@ -15,8 +15,8 @@
 struct Game_State game;
 struct Player player;
 struct Boss boss;
-struct Bullet bullets[MAX_BULLETS]
-struct Alien aliens[MAX_ALIENS]
+struct Bullet bullets[MAX_BULLETS];
+struct Alien aliens[MAX_ALIENS];
 struct Alien_Formation f;
 struct Ship ship;
 struct PowerUps powerups[MAX_POWERUPS];
@@ -48,14 +48,22 @@ void init_game(void){
 
 
 void update_game(void){
-  update_input(&input){
-  if (input->k){
-    game.mode = MODE_PLAYING;
-  }
+  update_input(&input);
 
-  while(game.mode == MODE_PLAYING){
+  if (game.mode == MODE_START){
+    printf("Press Space to Start!");
+
+    if (input.shoot){
+    game.mode = MODE_PLAYING;
+    return;
+  }
+}
+  if (game.mode == MODE_PLAYING){
     game.timers.frame_count++;
-    game.timers.seconds_count++;
+
+    if (game.timers.frame_count % GAME_FPS == 0){
+      game.timers.seconds_count++;
+    }
     game.timers.powerup_spawn_timer++;
     game.timers.event_timer++;
 
@@ -63,18 +71,48 @@ void update_game(void){
 
   }
 
-  if(input->pause){
+  if(input.pause){
     game.mode = MODE_PAUSED;
   }
 
-  while(game.mode == MODE_PAUSED){
+  if (game.mode == MODE_PAUSED){
     game.timers.frame_count = game.timers.frame_count;
     game.timers.seconds_count = game.timers.seconds_count;
     game.timers.powerup_spawn_timer = game.timers.powerup_spawn_timer;
     game.timers.event_timer = game.timers.event_timer;
 
     printf("PAUSED");
+
+  if(input.pause||input.shoot){
+    game.mode = MODE_PLAYING;
+    }
+  return;
+  }
+}
+
+if(game.mode == MODE_GAMEOVER){
+  printf("GAME OVER")
+  if (qualify_high_score){
+    game.mode = MODE_ENTER_INITIALS;
+    return;
   }
 
-  
+  else {
+    game.mode == MODE_SCOREBOARD;
+  }
+
+  if (input.restart){
+    init_game();
+    game.mode = MODE_PLAYING;
+  }
+}
+
+if (game.mode == MODE_ENTER_INITIALS){
+    insert_high_score();
+  if(input.shoot){
+    game.mode = MODE_SCOREBOARD;
+    return;
+  }
+}
+
 }
