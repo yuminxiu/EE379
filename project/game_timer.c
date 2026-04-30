@@ -1,5 +1,5 @@
 #include "game_timer.h"
-#define FPS 60
+#define FPS 30
 
 volatile int timer_tick = 0;
 
