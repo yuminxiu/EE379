@@ -9,8 +9,8 @@ void init_bullet(struct Bullet *bullet){
   bullet->dx = 0;
   bullet->dy = 0;
   bullet->active = false;
-  bullet->type = 0;
-  bullet->owner = 0;
+  bullet->type = BULLET_NORMAL;
+  bullet->owner = OWNER_PLAYER;
   bullet-> bounce_count = 0;
   bullet-> life_timer = 0;
 }
@@ -61,7 +61,7 @@ void update_bullet(struct Bullet *bullet) {
 
   bullet_move(bullet);
   
-  if (bullet->pos_x < 0 || bullet->pos_x > screen_width || bullet->pos_y < 0 || bullet->pos_y > screen_height){
+  if (bullet->pos_x < 0 || bullet->pos_x > SCREEN_WIDTH || bullet->pos_y < 0 || bullet->pos_y > SCREEN_HEIGHT){
 
     deactivate_bullet(bullet);
   }
