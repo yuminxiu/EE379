@@ -116,6 +116,6 @@
 #define SHIP_POINTS 50
 #define BOSS_POINTS 500
 
-#define POWERUP_SCORE_MULT 
+#define SCORE_MULT
 
 #endif
