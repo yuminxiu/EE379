@@ -127,4 +127,14 @@
 
 #define SCORE_MULT 2.5
 
+//BEAMS
+
+#define MAX_BEAMS 8
+#define BEAM_LANES 8
+#define SAFE_LANES 2
+
+#define BEAM_LANE_WIDTH (SCREEN_WIDTH / BEAM_LANES)
+#define BEAM_WARNING_TIME 90 //place holder
+#define BEAM_FIRE_TIME 45 //place holder
+
 #endif
