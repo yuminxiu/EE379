@@ -1,5 +1,6 @@
 #include "boss.h"
 #include "constants.h"
+#include <stdlib.h> //for rand()
 
 #define SPIRAL_STEPS 16
 static int spiral_dx[SPIRAL_STEPS] = { 0, 1, 2, 3, 2, 1, 0, -1, -2, -3, -2, -1, 0, 1, 2, 3};
@@ -73,6 +74,23 @@ void boss_shoot_multispiral(struct Boss *boss, struct Bullet bullets[], int max_
     int offset = (base + SPIRAL_STEPS / 2) % SPIRAL_STEPS;
 
     spawn_bullet(bullets, max_bullets, x, y, spiral_dx[offset], spiral_dy[offset],BULLET_NORMAL, OWNER_BOSS);
+}
+
+
+void boss_shoot_burst(struct Boss *boss, struct Bullet bullets[], int max_bullets) {
+    int x = boss->pos_x + boss->width / 2;
+    int y = boss->pos_y + boss->height / 2;
+
+    for (int i = 0; i < 8; i++) {
+        int dx = (rand() % 5) - 2;  // -2 to +2
+        int dy = (rand() % 5) - 2;  // -2 to +2
+
+        if (dx == 0 && dy == 0) {
+            dy = 2;
+        }
+
+        spawn_bullet(bullets, max_bullets, x, y, dx, dy, BULLET_BURST, OWNER_BOSS);
+    }
 }
 
 void boss_shoot(struct Boss *boss, struct Bullet bullets[], int max_bullets){
