@@ -3,6 +3,9 @@
 
 //Boss initialization
 
+static int spiral_dx[8] = { 0, 1, 2, 1, 0, -1, -2, -1 };
+static int spiral_dy[8] = { 2, 2, 1, 0, -1, 0, 1, 2 };
+
 void init_boss(struct Boss *boss) { 
   boss->active = false; //inactive
   boss-> hp = 100;
@@ -35,13 +38,86 @@ void move_boss(struct Boss *boss) {
     }
 }
 
+
+void boss_shoot_straight(struct Boss *boss, struct Bullet bullets[], int max_bullets) {
+
+    int x = boss->pos_x + boss->width / 2;
+    int y = boss->pos_y + boss->height;
+
+    spawn_bullet(bullets, max_bullets, x, y, 0, ENEMY_BULLET_SPEED, BULLET_NORMAL, OWNER_BOSS);
+}
+
+void boss_shoot_spread(struct Boss *boss, struct Bullet bullets[], int max_bullets) {
+
+    int x = boss->pos_x + boss->width / 2;
+    int y = boss->pos_y + boss->height;
+
+    spawn_bullet(bullets, max_bullets, x, y, -2, ENEMY_BULLET_SPEED, BULLET_NORMAL, OWNER_BOSS);
+    spawn_bullet(bullets, max_bullets, x, y,  0, ENEMY_BULLET_SPEED, BULLET_NORMAL, OWNER_BOSS);
+    spawn_bullet(bullets, max_bullets, x, y,  2, ENEMY_BULLET_SPEED, BULLET_NORMAL, OWNER_BOSS);
+}
+
+void boss_shoot_spiral(struct Boss *boss, struct Bullet bullets[], int max_bullets) {
+
+    int index = (boss->timer_pattern / 5) % 8; // slows rotation, cycles through directions
+
+    int x = boss->pos_x + boss->width / 2;
+    int y = boss->pos_y + boss->height / 2;
+
+    spawn_bullet(bullets, max_bullets, x, y, spiral_dx[index], spiral_dy[index], BULLET_NORMAL, OWNER_BOSS);
+}
+
+void boss_shoot_multispiral(struct Boss *boss, struct Bullet bullets[], int max_bullets) {
+
+    int base = (boss->timer_pattern / 4) % 8;
+
+    int x = boss->pos_x + boss->width / 2;
+    int y = boss->pos_y + boss->height / 2;
+
+    // Spiral 1 (clockwise)
+    spawn_bullet(bullets, max_bullets, x, y, spiral_dx[base], spiral_dy[base], BULLET_NORMAL, OWNER_BOSS);
+
+    // Spiral 2 (counter-clockwise)
+    int reverse = (8 - base) % 8;
+
+    spawn_bullet(bullets, max_bullets, x, y, spiral_dx[reverse], spiral_dy[reverse], BULLET_NORMAL, OWNER_BOSS);
+}
+
 void boss_shoot(struct Boss *boss, struct Bullet bullets[], int max_bullets){
   if (!boss->active){
     return;
   }
 
+    if (boss->pattern_timer % BOSS_SHOOT_COOLDOWN !=0){
+      return;
+    }
+
+  switch (boss->pattern_state){
+    case BOSS_PATTERN_STRAIGHT:
   spawn_bullet(bullets, max_bullets, boss->pos_x + boss->width/2, boss->pos_y + boss->height,
       0, 2, 0, 2); //single bullet from center
+    break;
+
+    case BOSS_PATTERN_SPREAD:
+      boss_shoot_spread(boss,bullets, max_bullets);
+    break;
+
+    case BOSS_PATTERN_TRACK:
+      boss_shoot_track(boss, bullets, max_bullets);
+    break;
+
+    case BOSS_PATTERN_SPIRAL:
+      boss_shoot_spiral(boss, bullets, max_bullets);
+    break;
+
+    case BOSS_PATTERN_MULTISPIRAL:
+      bosss_shoot_multispiral(boss, bullets, max_bullets);
+    break;
+
+    case BOSS_PATTERN_BURST:
+      boss_shoot_burst(boss, bullets, max_bullets);
+    break;
+    
 }
 
 void update_boss(struct Boss *boss){
@@ -52,7 +128,14 @@ void update_boss(struct Boss *boss){
     move_boss(boss);
     boss->pattern_timer++;
 
-  // pattern timer placeholder
+  // pattern timer placeholder that only loops between 2 states
+  if (boss->pattern_timer % 300 == 0) {
+    boss->pattern_state++;
+
+    if (boss->pattern_state > BOSS_PATTERN_SPIRAL){
+      boss->pattern_state = BOSSS_PATTERN_STRAIGHT;
+    }
+  }
 
   if (boss->hp <= boss->max_hp/2){
     boss->pattern_state = 1;
