@@ -13,6 +13,6 @@ struct Input{
 }
 
 void init_input(struct Input *input);
-void update_struct(struct Input *input);
+void update_input(struct Input *input);
 
 #endif
