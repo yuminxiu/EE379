@@ -15,6 +15,7 @@ struct Timers {
   int frame_count;
   int seconds_count;
   int event_timer;
+  int powerup_spawn_timer;
 };
 
 struct Game_State {
