@@ -3,9 +3,9 @@ XTmrCtr timer;
 
 void timerInterruptHandler(void *userParam, u8 TmrCtrNumber) {
 
-	}
 
-	if (mode > 3){ mode = 0;}
+
+
 }
 
 	//Configure Timer and timer interrupt as done in class, and comment every line
