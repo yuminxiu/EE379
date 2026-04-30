@@ -45,3 +45,36 @@ void init_game(void){
   init_powerup_arr(powerups, MAX_POWERUPS);
   init_input(&input);
 }
+
+
+void update_game(void){
+  update_input(&input){
+  if (input->k){
+    game.mode = MODE_PLAYING;
+  }
+
+  while(game.mode == MODE_PLAYING){
+    game.timers.frame_count++;
+    game.timers.seconds_count++;
+    game.timers.powerup_spawn_timer++;
+    game.timers.event_timer++;
+
+    add_score(&sc, &player, points);
+
+  }
+
+  if(input->pause){
+    game.mode = MODE_PAUSED;
+  }
+
+  while(game.mode == MODE_PAUSED){
+    game.timers.frame_count = game.timers.frame_count;
+    game.timers.seconds_count = game.timers.seconds_count;
+    game.timers.powerup_spawn_timer = game.timers.powerup_spawn_timer;
+    game.timers.event_timer = game.timers.event_timer;
+
+    printf("PAUSED");
+  }
+
+  
+}
