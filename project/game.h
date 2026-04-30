@@ -25,7 +25,7 @@ struct Game_State {
  struct Timers timers;
 };
 
-void init_game_state(struct Game_State *game);
-void update_game_state(struct Game_State *game);
+void init_game(void);
+void update_game(void);
 
 #endif
