@@ -1,8 +1,17 @@
-#ifndef INTERRUPTS_H
-#define INTERRUPTS_H
+#ifndef INPUTS_H
+#define INPUTS_H
 
-extern XScuGic GIC;
+#include <stdbool.h>
 
-void initIntrSystem(XScuGic *IntcInstancePtr);
+struct Input{
+  bool left;
+  bool right;
+  bool shoot;
+  bool pause;
+  bool restart;
+}
+
+void init_input(struct Input *input);
+void update_struct(struct Input *input);
 
 #endif
