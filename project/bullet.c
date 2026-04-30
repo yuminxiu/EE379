@@ -63,6 +63,8 @@ void spawn_bullet(struct Bullet bullets[], int size,
             bullets[i].type = type;
             bullets[i].owner = owner;
             bullets[i].active = true;
+            bullets[i].bounce_count = 0;
+            bullets[i].life_timer = 180;
 
           if (type == BULLET_LASER){
               bullets[i].dx= 0;
