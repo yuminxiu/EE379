@@ -9,6 +9,7 @@ struct Input{
   bool shoot;
   bool pause;
   bool restart;
+  char key_pressed;
 }
 
 void init_input(struct Input *input);
