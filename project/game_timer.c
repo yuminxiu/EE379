@@ -1,9 +1,15 @@
+#include "xscugic.h"
+#include "xtmrctr.h"
+#include "xparameters.h"
+#include "game_timer.h"
+
+volatile int timer_tick = 0;
 
 XTmrCtr timer;
 
 void timerInterruptHandler(void *userParam, u8 TmrCtrNumber) {
 
-
+	timer_tick = 1; // flag for main loop
 
 
 }
