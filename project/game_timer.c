@@ -1,6 +1,3 @@
-#include "xscugic.h"
-#include "xtmrctr.h"
-#include "xparameters.h"
 #include "game_timer.h"
 
 volatile int timer_tick = 0;
