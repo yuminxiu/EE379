@@ -6,6 +6,14 @@
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 320
 
+// FPS
+
+#define GAME_FPS 30
+#define TIMER_CLOCK_HZ 100000000
+#define TIMER_RESET_VALUE (0xFFFFFFFF - (TIMER_CLOCK_HZ / GAME_FPS))
+
+// 10 frames = .33seconds, 15 = 0.5seconds, 300 = 10 seconds
+
 // Gameplay Regions
 #define PLAYER_START_Y 280 //PLACEHOLDER VALUE
 #define ENEMY_START_Y 40 // PLACEHOLDER VALUE
@@ -21,7 +29,7 @@
 #define ALIEN_SPACING_X 8 // placeholder
 
 #define ALIEN_MOVE_SPEED 1 //placeholder value
-#define ALIEN_DROP_Y 12 // placeholder value
+#define ALIEN_DROP_Y 8 // placeholder value
 
 // SHIP
 
@@ -61,7 +69,7 @@
 #define BOSS_BULLET_WIDTH 2 // placeholder
 #define BOSS_BULLET_HEIGHT 6 // placeholder
 
-#define PLAYER_BULLET_SPEED -4 // place holder
+#define PLAYER_BULLET_SPEED -5 // place holder
 #define ENEMY_BULLET_SPEED 2 //placeholder
 
 // Bullet types
@@ -109,9 +117,9 @@
 #define MAX_POWERUPS 5
 
 // TIMING
-#define PLAYER_SHOOT_COOLDOWN 15 // placeholder
+#define PLAYER_SHOOT_COOLDOWN 10 // placeholder
 #define ALIEN_SHOOT_COOLDOWN 60 // placeholder
-#define BOSS_SHOOT_COOLDOWN 30 //placeholder
+#define BOSS_SHOOT_COOLDOWN 15 //placeholder
 
 //UI
 
