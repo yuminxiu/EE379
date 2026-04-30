@@ -110,4 +110,12 @@
 #define BOSS_HP_BAR_WIDTH 150 // placeholder
 #define BOSS_HP_BAR_HEIGHT 8 // placeholder
 
+// POINTS
+
+#define ALIEN_POINTS 20
+#define SHIP_POINTS 50
+#define BOSS_POINTS 500
+
+#define POWERUP_SCORE_MULT 
+
 #endif
