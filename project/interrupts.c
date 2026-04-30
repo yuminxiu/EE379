@@ -1,3 +1,6 @@
+#include "interrupts.h"
+#include "xparameters.h"
+#include "xil_exception.h"
 
 static XScuGic GIC;
 
@@ -12,4 +15,4 @@ void initIntrSystem(XScuGic * IntcInstancePtr) {
 
 }
 
-initIntrSystem(&GIC);
+initIntrSystem(&GIC); // move this line to main.c later
