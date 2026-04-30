@@ -36,11 +36,34 @@ void update_bullet(struct Bullet *bullet) {
   bullet_move(bullet);
 
   // screen bounds
+  if (bullet->type == BULLET_BURST) {
+    bullet->pos_x += bullet->dx;
+    bullet->pos_y += bullet->dy;
 
+    if (bullet->pos_x <= 0 || bullet->pos_x >= SCREEN_WIDTH) {
+        bullet->dx *= -1;
+        bullet->bounce_count++;
+    }
+
+    if (bullet->pos_y <= 0 || bullet->pos_y >= SCREEN_HEIGHT) {
+        bullet->dy *= -1;
+        bullet->bounce_count++;
+    }
+
+    bullet->life_timer--;
+
+    if (bullet->bounce_count >= 3 || bullet->life_timer <= 0) {
+        deactivate_bullet(bullet);
+    }
+
+    return;
+}
   if (bullet->pos_x < 0 || bullet->pos_x > screen_width || bullet->pos_y < 0 || bullet->pos_y > screen_height){
 
     deactivate_bullet(bullet);
   }
+
+  
 }
 
 void update_bullet_arr(struct Bullet bullets[], int size){
