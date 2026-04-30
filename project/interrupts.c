@@ -15,4 +15,3 @@ void initIntrSystem(XScuGic * IntcInstancePtr) {
 
 }
 
-initIntrSystem(&GIC); // move this line to main.c later
