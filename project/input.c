@@ -63,7 +63,7 @@ void update_input(struct Input *input){
 			input->restart = true;
 		}
 		if (c >= 'A' && c <= 'Z') {
-            c = c + ('a' - 'A');
+            c = c + ('a' - 'A'); //converts uppercase to lowercase letters
         }	
 
 		if (c == cheat_code[cheat_index]){
