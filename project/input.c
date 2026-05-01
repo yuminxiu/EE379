@@ -70,10 +70,8 @@ void update_input(struct Input *input){
 									if (c == 'd' || c =='D'){
 										if (c == 'q' || c =='Q'){
 											if (c == 'e' || c =='E'){
-												if (c == 'q' || c =='E'){
-													if (c == ' '){
-														input->cheat = true;
-													}
+												if (c == ' '){
+													input->cheat = true;
 												}
 											}
 										}
@@ -85,7 +83,9 @@ void update_input(struct Input *input){
 				}
 			}
 		}
-	}
+										
+																													
+												
 								
 }
 
