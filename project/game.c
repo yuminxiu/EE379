@@ -70,8 +70,10 @@ void update_game(void){
       init_powerup_arr(powerups, MAX_POWERUPS);
       init_alien_arr(aliens, MAX_ALIENS); 
       init_ship(&ship); //prevents ship from randomly existing
+      
       game.wave = 3;
       game.boss_stage = true;
+      
       init_boss(&boss); // cleanly reset boss
       boss.active = true;
       game.mode = MODE_PLAYING;
@@ -107,8 +109,10 @@ void update_game(void){
       init_powerup_arr(powerups, MAX_POWERUPS);
       init_alien_arr(aliens, MAX_ALIENS); 
       init_ship(&ship); //prevents ship from randomly existing
+      
       game.wave = 3;
       game.boss_stage = true;
+      
       init_boss(&boss); // cleanly reset boss
       boss.active = true;
       game.mode = MODE_PLAYING;
@@ -288,10 +292,26 @@ static void handle_collisions(void){
         if (rect_col(bullet_rect(&bullets[i]), player_rect(&player))){
 
           deactivate_bullet(&bullet[i]);
+          player_take_hit(&player);
 
-          if(player.powertype == POWERUP_SHIELD
-    
-    
+          if(player.lives <= 0){
+            game.mode == MODE_GAMEOVER;
+          }
+        }
+      }
+  }
+  //player and powerups
+
+  for (int i = 0; i < MAX_POWERUPS; i++){
+    if(!powerups[i].active{
+      continue;
+    }
+
+    if (rect_col(player_rect(&player),powerup_rect(&powerups[i]))){
+      apply_powerup(&powerups[i], &player);
+    }
+  }
+  
 }
 
 static void clear_wave_check(void) {
