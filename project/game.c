@@ -228,6 +228,70 @@ static void handle_spawning(void){
   }
 }
 static void handle_collisions(void){
+  
+  for (int i = 0; i <MAX_BULLETS; i++){
+    if(!bullets[i].active){
+      return;
+    }
+//for player bullets hitting aliens, ship or boss
+    if(bullets[i].owner == OWNER_PLAYER){
+       //bullet vs aliens
+
+      if (!game.boss_stage){
+        for (int j = 0; j < MAX_ALIENS; j++){
+          if(!aliens[j].active){
+            continue;
+          }
+
+          if (rect_col(bullet_rect(&bullets[i]), alien_rect(&aliens[j]))){
+            aliens[j].active = false;
+            add_score(&sc, &player, ALIEN_POINTS);
+
+            if (bullets[i].type != BULLET_PIERCE && bullet[i].type != BULLET_LASER){
+              deactivate_bullet(&bullet[i]);
+            }
+            break;
+          }
+        }
+      }
+
+      //player vs ship
+
+      if(ship.active && rect_col(bullet_rect(&bullets[i]), ship_rect(&ship))){
+        ship.active = false;
+        add_score(&sc, &player, SHIP_POINTS);
+      
+        if (bullets[i].type != BULLET_PIERCE && bullet[i].type != BULLET_LASER){
+              deactivate_bullet(&bullet[i]);
+            }
+      }
+
+      // player vs boss
+
+      if (game.boss_stage && boss.active && rect_col(bullet_rect(&bullets[i]), boss_rect(&boss))){
+        boss.hp--;
+        
+        if (bullets[i].type != BULLET_PIERCE && bullet[i].type != BULLET_LASER){
+              deactivate_bullet(&bullet[i]);
+            }
+
+        if (boss.hp <= 0){
+          boss.active = false;
+          add_score(&sc, &player, BOSS_POINTS);
+        }
+      }
+    }
+
+    //enemies vs player
+      if (bullets[i].owner == OWNER_ALIEN || bullets[i].owner == OWNER_BOSS){
+
+        if (rect_col(bullet_rect(&bullets[i]), player_rect(&player))){
+
+          deactivate_bullet(&bullet[i]);
+
+          if(player.powertype == POWERUP_SHIELD
+    
+    
 }
 
 static void clear_wave_check(void) {
@@ -238,7 +302,7 @@ static void clear_wave_check(void) {
         return;
     }
 
-    for (int i = 0; i < MAX_ALIENS; i++) {
+    for (int i = 0; i < MAX_ALIENS; i++) { // loops through every alien, if 1 is active, return. wave does not advance
         if (aliens[i].active) {
             return;
         }
