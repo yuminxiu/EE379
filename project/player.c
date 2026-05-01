@@ -12,9 +12,14 @@ void init_player(struct Player *player){
   player->shoot_timer = 0;
 
   player->hit = false;
+  player->shield_active = false;
+  player->shield_timer = 0;
 
-  player->power_type = 0;
-  player->power_timer = 0;
+  player->score_mult_active = false;
+  player->score_mult_timer = 0;
+
+  player->bullet_power_type = BULLET_POWER_NONE;
+  player->bullet_power_timer = 0;
 }
 
 void update_player(struct Player *player){  
@@ -28,40 +33,59 @@ void update_player(struct Player *player){
     }
   }
 
+  if (player->shield_active) {
+      player->shield_timer--;
 
-  if (player->power_type == POWERUP_SHIELD){
-      player->power_type = POWERUP_NONE;
-      player->power_timer = 0;
-  } 
-    else {
-      player->lives--;
-    }
-  
-  if (player->power_type != POWERUP_NONE) {
-    player->power_timer--;
-  
-    if (player->power_timer <=0){
-      player->power_type = POWERUP_NONE;
-      player->power_timer = 0;
-    }
+      if (player->shield_timer <= 0) {
+          player->shield_active = false;
+          player->shield_timer = 0;
+      }
+  }
+
+  if (player->score_mult_active) {
+      player->score_mult_timer--;
+
+      if (player->score_mult_timer <= 0) {
+          player->score_mult_active = false;
+          player->score_mult_timer = 0;
+      }
+  }
+
+  if (player->bullet_power_type != BULLET_POWER_NONE) {
+      player->bullet_power_timer--;
+
+      if (player->bullet_power_timer <= 0) {
+          player->bullet_power_type = BULLET_POWER_NONE;
+          player->bullet_power_timer = 0;
+      }
   }
 
   player->hit = false; // reset hit flag
 
 }
 
+void player_take_hit(struct Player *player) {
+    if (player->shield_active) {
+        player->shield_active = false;
+        player->shield_timer = 0;
+        return;
+    }
+
+    player->lives--;
+    player->hit = true;
+}
 
 void player_move(struct Player *player, int dx){
   player->pos_x += dx;
 
   // screen bounds
-  if (player->pos_x < SCREEN_WIDTH) {
-    player->pos_x = SCREEN_WIDTH;
-  }
+    if (player->pos_x < 0) {
+        player->pos_x = 0;
+    }
 
-  if (player->pos_x > SCREEN_WIDTH){
-    player->pos_x = SCREEN_WIDTH;
-  }
+    if (player->pos_x > SCREEN_WIDTH - PLAYER_WIDTH) {
+        player->pos_x = SCREEN_WIDTH - PLAYER_WIDTH;
+    }
 }
 
 
