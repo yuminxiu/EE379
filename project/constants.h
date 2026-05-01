@@ -58,6 +58,7 @@
 #define PLAYER_HEIGHT 16 // placeholder
 
 #define PLAYER_SPEED 3 // placeholder
+#define MAX_LIVES 4
 
 // BULLETS
 #define PLAYER_BULLET_WIDTH 2 // place holder
@@ -80,6 +81,11 @@
 #define BULLET_ROUND 3
 #define BULLET_BURST 4
 
+#define BULLET_POWER_NONE        0
+#define BULLET_POWER_LASER       1
+#define BULLET_POWER_TRIPLE_SHOT 2
+#define BULLET_POWER_PIERCE      3
+
 // OWNERS
 
 #define OWNER_PLAYER 0
@@ -88,7 +94,8 @@
 
 // HITBOXES
 
-#define PLAYER_HITBOX_WIDTH 16 // placehodler
+#define PLAYER_HITBOX_WIDTH 12 // placehodler
+#define PLAYER_HITBOX_HEIGHT 12 // placeholder
 #define BOSS_HITBOX_WIDTH 16 // placeholder
 
 // POWERUPS
@@ -133,7 +140,7 @@
 #define SHIP_POINTS 50
 #define BOSS_POINTS 500
 
-#define SCORE_MULT 2.5
+#define SCORE_MULT 2
 
 //BEAMS
 
@@ -144,5 +151,13 @@
 #define BEAM_LANE_WIDTH (SCREEN_WIDTH / BEAM_LANES)
 #define BEAM_WARNING_TIME 90 //place holder
 #define BEAM_FIRE_TIME 45 //place holder
+
+//Spawning
+
+#define SHIP_SPAWN_MIN_SEC       10
+#define SHIP_SPAWN_RANGE_SEC     10
+
+#define POWERUP_SPAWN_MIN_SEC    7
+#define POWERUP_SPAWN_RANGE_SEC  10
 
 #endif
