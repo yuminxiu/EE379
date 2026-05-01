@@ -86,7 +86,8 @@ void update_game(void){
     }
 
     add_score(&sc, &player, points);
-    spawn_powerup(powerups, MAX_POWERUPS, rand(MAX_POWERUPS)%6, rand(MAX_POWERUPS)%6, rand(), &p);
+    spawn_powerup(powerups, MAX_POWERUPS, p.pos_x,p.pos_y , rand(p.type)%6, p.dy, p.despawn_timer);
+    rand(spawn_ship(&s, rand(s.direction)%2));
   }
 
 
