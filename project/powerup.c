@@ -60,26 +60,29 @@ void apply_powerup(struct PowerUp *p, struct Player *player){
 
     switch(p->type) {
         case POWERUP_EXTRA_LIFE:
-                player->lives +=1;
+            if(player-> lives < PLAYER_MAX_LIVES){
+                player->lives ++;
+            }
                 break;
+        
         case POWERUP_SCORE_MULT:
-            player->power_type = POWERUP_SCORE_MULT;
-            player->power_timer = SCORE_MULT_TIME;
+            player->score_mult_active = true;
+            player->score_mult_timer = SCORE_MULT_TIME;
             break;
         
         case POWERUP_LASER:
-            player->power_type = POWERUP_LASER;
-            player->power_timer = LASER_TIME;
+            player->bullet_power_type = BULLET_POWER_LASER;
+            player->bullet_power_timer = LASER_TIME;
             break;
         
         case POWERUP_SHIELD:
-            player->power_type = POWERUP_SHIELD;
-            player-> power_timer = SHIELD_TIME;
+            player->shield_active = true;
+            player-> shield_timer = SHIELD_TIME;
             break;
         
         case POWERUP_TRIPLE_SHOT:
-            player->power_type = POWERUP_TRIPLE_SHOT;
-            player->power_timer = TRIPLE_SHOT_TIME;
+            player->bullet_power_type = BULLET_POWER_TRIPLE_SHOT;
+            player->bullet_power_timer = TRIPLE_SHOT_TIME;
             break;
     }
 
