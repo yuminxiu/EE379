@@ -12,10 +12,15 @@
 
 
 struct Timers {
-  int frame_count;
-  int seconds_count;
-  int event_timer;
+  int frame_count; // counts frams up to GAME_FPS
+  int seconds_count; // seconds elapsed, currently optional
+  int ship_spawn_timer;
+  int next_ship_spawn;
+
   int powerup_spawn_timer;
+  int next_powerup_spawn;
+
+  int wave_transistion_timer;
 };
 
 struct Game_State {
