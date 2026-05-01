@@ -1,6 +1,3 @@
-// REWORK TIMERS STRUCT IN GAME.H BEFORE GOING ANY FURTHER. NEED TO EXPAND INTO MORE SPECIFIC TIMERS INSTEAD OF GENERIC TIMERS TO ACCOUNT FOR MULTIPLE
-// TIME DEPENDENT FUNCTIONS WITHOUT GLOBALLY RESETTING THE TIMERS
-
 #include "game.h"
 
 #include "constants.h"
@@ -68,6 +65,19 @@ void update_game(void){
 
   if (game.mode == MODE_START){
     printf("Press Space to Start!");
+    if (input.cheat){
+      init_bullet_arr(bullets, MAX_BULLETS);
+      init_powerup_arr(powerups, MAX_POWERUPS);
+      init_alien_arr(aliens, MAX_ALIENS); 
+      init_ship(&ship); //prevents ship from randomly existing
+      game.wave = 3;
+      game.boss_stage = true;
+      init_boss(&boss); // cleanly reset boss
+      boss.active = true;
+      game.mode = MODE_PLAYING;
+
+      return;
+    }
 
     if (input.shoot){
     game.mode = MODE_PLAYING;
@@ -91,6 +101,19 @@ void update_game(void){
 
   if (game.mode == MODE_PAUSED){
     printf("PAUSED");
+    if (input.cheat){
+      init_bullet_arr(bullets, MAX_BULLETS);
+      init_powerup_arr(powerups, MAX_POWERUPS);
+      init_alien_arr(aliens, MAX_ALIENS); 
+      init_ship(&ship); //prevents ship from randomly existing
+      game.wave = 3;
+      game.boss_stage = true;
+      init_boss(&boss); // cleanly reset boss
+      boss.active = true;
+      game.mode = MODE_PLAYING;
+
+      return;
+    }
 
     if(input.pause||input.shoot){
       game.mode = MODE_PLAYING;
@@ -206,13 +229,17 @@ static void handle_spawning(void){
 static void handle_collisions(void){
 }
 static void clear_wave_check(void){
-  handle_collisions();
   if(*/all aliens dead*/){
     game.wave++;
     init_alien_arr(aliens, MAX_ALIENS);
+    init_bullet_arr(bullets, MAX_BULLETS);
+    init_powerup_arr(powerups, MAX_POWERUPS);
     
     if(game.wave == 3){
       game.boss_stage = true;
+      
+      init_boss(&boss);
+      boss.active = true;
     }
   }
   
