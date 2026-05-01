@@ -231,6 +231,7 @@ static void handle_spawning(void){
     game.timers.next_ship_spawn = ((rand() % SHIP_SPAWN_RANGE_SEC) + SHIP_SPAWN_MIN_SEC) * GAME_FPS;
   }
 }
+
 static void handle_collisions(void){
   
   for (int i = 0; i <MAX_BULLETS; i++){
@@ -300,6 +301,7 @@ static void handle_collisions(void){
         }
       }
   }
+  
   //player and powerups
 
   for (int i = 0; i < MAX_POWERUPS; i++){
