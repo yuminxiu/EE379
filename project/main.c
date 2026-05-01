@@ -22,9 +22,7 @@ int main(void){
   init_game_timer(&GIC);
 
   init_input(&input);
-  init_render(&game, &player, powerups, MAX_POWERUPS,
-            &ship, aliens, MAX_ALIENS,
-            &sc, &boss, bullets, MAX_BULLETS);
+  init_render();
   init_game();
 
   while (true) {
@@ -32,7 +30,9 @@ int main(void){
       timer_tick = 0;
   
       update_game();
-      render_game();
+      render_game(&game, &player, powerups, MAX_POWERUPS,
+            &ship, aliens, MAX_ALIENS,
+            &sc, &boss, bullets, MAX_BULLETS);
     }
   }
   return 0;
