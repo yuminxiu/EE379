@@ -108,7 +108,9 @@ void player_shoot(struct Player *player, struct Bullet bullets[], int max_bullet
   else if (player->bullet_power_type == BULLET_POWER_LASER) {
     spawn_bullet(bullets, max_bullets, x,y,0, PLAYER_BULLET_SPEED, BULLET_LASER, OWNER_PLAYER);
   }
-  else if (player->bullet_power_type == BULLET_POWER_PIERCE){ }
+  else if (player->bullet_power_type == BULLET_POWER_PIERCE){
+    spawn_bullet(bullets, max_bullets, x,y,0, PLAYER_BULLET_SPEED, BULLET_PIERCE, OWNER_PLAYER);
+  }
   else {
     // normal shot
   spawn_bullet(bullets, max_bullets, x, y, 0, PLAYER_BULLET_SPEED, BULLET_NORMAL, OWNER_PLAYER); 
