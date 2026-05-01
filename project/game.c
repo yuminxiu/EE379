@@ -45,9 +45,9 @@ void init_game(void){
   game.timers.frame_count = 0;
   game.timers.seconds_count = 0;
   game.timers.ship_spawn_timer = 0;
-  game.timers.next_ship_spawn = (rand() % 300) + 300;
+  game.timers.next_ship_spawn = (rand() % 300) + 300; // roughly 10 -20 seconds
   game.timers.powerup_spawn_timer = 0;
-  game.timers.next_powerup_spawn = (rand() % 300) + 200;
+  game.timers.next_powerup_spawn = (rand() % 300) + 200; // roughly 7-17 seconds
 
   game.timers.wave_transition_timer = 0;
 
