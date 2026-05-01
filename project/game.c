@@ -11,6 +11,7 @@
 #include "ship.h"
 #include "bullet.h"
 #include "input.h"
+#include <stdlib.h>
 
 struct Game_State game;
 struct Player player;
@@ -72,8 +73,20 @@ void update_game(void){
     game.timers.powerup_spawn_timer++;
     game.timers.event_timer++;
 
-    add_score(&sc, &player, points);
+    update_player(&player);
+    update_bullet_arr(bullets, MAX_BULLETS);
+    update_powerup_arr(powerups, MAX_POWERUPS);
 
+    if (game.boss_stage){
+      update_boss(&boss);
+      boss_shoot(&boss, bullets, MAX_BULLETS);
+    } else {
+      update_alien_arr(aliens, MAX_ALIENS);
+      update_ship(&ship);
+    }
+
+    add_score(&sc, &player, points);
+    spawn_powerup(powerups, MAX_POWERUPS, rand(MAX_POWERUPS)%6, rand(MAX_POWERUPS)%6, rand(), &p);
   }
 
 
