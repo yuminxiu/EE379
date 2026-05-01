@@ -5,6 +5,8 @@
 #define UART_BASEADDR XPAR_XUARTPS_0_BASEADDR
 // XPAR_PS7_UART_1_BASEADDR
 
+const char cheat_code[]= "wwssadadqe ";
+int cheat_index = 0;
 
 void init_input(struct Input *input){
 	input->left = false;
@@ -60,33 +62,23 @@ void update_input(struct Input *input){
 		else if (c == 'k' || c == 'K'){
 			input->restart = true;
 		}
-		else if(c == 'w' || c == 'W'){
-			if(c == 'w' || c == 'W'){
-				if (c =='s' || c == 'S'){
-					if (c =='s' || c == 'S'){
-						if ( c == 'a' || c == 'A'){
-							if (c == 'd' || c =='D'){
-								if ( c == 'a' || c == 'A'){
-									if (c == 'd' || c =='D'){
-										if (c == 'q' || c =='Q'){
-											if (c == 'e' || c =='E'){
-												if (c == ' '){
-													input->cheat = true;
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
+		if (c >= 'A' && c <= 'Z') {
+            c = c + ('a' - 'A');
+        }	
+
+		if (c == cheat_code[cheat_index]){
+			cheat_index++;
+
+			if (cheat_code[cheat-index= == '\0'){
+				input->cheat = true;
+				cheat_index = 0;
 			}
-		}
-										
-																													
-												
-								
+			else {
+				cheat_index = 0;
+			}
+			
+		}								
+																																			
 }
 
 
