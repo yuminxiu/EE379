@@ -9,7 +9,7 @@ void init_render(void){
 	display.clearDisplay(clrWhite);
 }
 
-void render_game((struct Game_State *game, struct Player *player, struct PowerUp powerups[],int max_powerups, struct Ship *ship, struct Alien *aliens[MAX_ALIENS], int max_aliens,
+void render_game(struct Game_State *game, struct Player *player, struct PowerUp powerups[],int max_powerups, struct Ship *ship, struct Alien aliens[], int max_aliens,
     struct Score_Sys *sc, struct Boss *boss, struct Bullet bullets[], int max_bullets) {
 
 
@@ -42,7 +42,7 @@ void render_game((struct Game_State *game, struct Player *player, struct PowerUp
 
 void draw_bullets(struct Bullet bullets[], int max_bullets){
 	for (int i = 0; i < max_bullets; i++){
-		if (!bullet[i].active){
+		if (!bullets[i].active){
 			continue;
 		}
 
@@ -58,7 +58,7 @@ void draw_bullets(struct Bullet bullets[], int max_bullets){
 	}
 }
 
-void draw_aliens(struct Alien *aliens[], int max_aliens){
+void draw_aliens(struct Alien aliens[], int max_aliens){
 	for (int i = 0; i < max_aliens; i++){
 		if (!aliens[i].active){
 			continue;
@@ -102,9 +102,28 @@ void draw_ui(struct Player *player, struct Score_Sys *sc, struct Game_State *gam
     }
 
     // Placeholder boss HP bar
-    if (game->boss_stage && boss.active) {
+    if (game->boss_stage && boss->active) {
         display.fillRectangle(70, 4, BOSS_HP_BAR_WIDTH, BOSS_HP_BAR_HEIGHT, clrMagenta);
     }
 }
+
+void draw_player(struct Player *player) {
+    display.fillRectangle(player->pos_x,
+                          player->pos_y,
+                          PLAYER_WIDTH,
+                          PLAYER_HEIGHT,
+                          clrGreen);
+}
+
+void draw_boss(struct Boss *boss) {
+    if (!boss->active) {
+        return;
+    }
+
+    display.fillRectangle(boss->pos_x,
+                          boss->pos_y,
+                          boss->width,
+                          boss->height,
+                          clrRed);
 
 	
