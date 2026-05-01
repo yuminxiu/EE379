@@ -19,7 +19,7 @@ struct Bullet bullets[MAX_BULLETS];
 struct Alien aliens[MAX_ALIENS];
 struct Alien_Formation f;
 struct Ship ship;
-struct PowerUps powerups[MAX_POWERUPS];
+struct PowerUp powerups[MAX_POWERUPS];
 struct Score_Sys sc;
 struct Input input;
 
@@ -55,10 +55,15 @@ void update_game(void){
 
     if (input.shoot){
     game.mode = MODE_PLAYING;
+    }
     return;
-  }
 }
   if (game.mode == MODE_PLAYING){
+      if(input.pause){
+        game.mode = MODE_PAUSED;
+        return;
+      }
+    
     game.timers.frame_count++;
 
     if (game.timers.frame_count % GAME_FPS == 0){
@@ -71,48 +76,48 @@ void update_game(void){
 
   }
 
-  if(input.pause){
-    game.mode = MODE_PAUSED;
-  }
 
   if (game.mode == MODE_PAUSED){
-    game.timers.frame_count = game.timers.frame_count;
-    game.timers.seconds_count = game.timers.seconds_count;
-    game.timers.powerup_spawn_timer = game.timers.powerup_spawn_timer;
-    game.timers.event_timer = game.timers.event_timer;
-
     printf("PAUSED");
 
-  if(input.pause||input.shoot){
-    game.mode = MODE_PLAYING;
+    if(input.pause||input.shoot){
+      game.mode = MODE_PLAYING;
     }
   return;
-  }
 }
 
 if(game.mode == MODE_GAMEOVER){
-  printf("GAME OVER")
-  if (qualify_high_score){
+  printf("GAME OVER");
+  if (qualify_high_score(&sc,sc.current_score)){
     game.mode = MODE_ENTER_INITIALS;
     return;
   }
 
   else {
-    game.mode == MODE_SCOREBOARD;
+    game.mode = MODE_SCOREBOARD;
+    return;
   }
 
   if (input.restart){
     init_game();
     game.mode = MODE_PLAYING;
+    return;
   }
 }
 
 if (game.mode == MODE_ENTER_INITIALS){
-    insert_high_score();
+    insert_high_score(&sc, sc.current_score, "AAA");
   if(input.shoot){
     game.mode = MODE_SCOREBOARD;
     return;
   }
 }
 
+  if (game.mode == MODE_SCOREBOARD){
+      if (input.restart){
+        init_game();
+        game.mode = MODE_PLAYING;
+      }
+    return;
+  }
 }
