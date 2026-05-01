@@ -64,7 +64,7 @@ void draw_aliens(struct Alien *aliens[], int max_aliens){
 			continue;
 		}
 
-		display.fillRectangle(aliens[i].pos_x, aliens[i].pos_y, ALIEN_WIDTH, ALIEN_HEIGHT, clrGreen);
+		display.fillRectangle(aliens[i].pos_x, aliens[i].pos_y, ALIEN_WIDTH, ALIEN_HEIGHT, clrCyan);
 	}
 }
 
@@ -103,7 +103,7 @@ void draw_ui(struct Player *player, struct Score_Sys *sc, struct Game_State *gam
 
     // Placeholder boss HP bar
     if (game->boss_stage && boss.active) {
-        display.fillRectangle(70, 4, BOSS_HP_BAR_WIDTH, BOSS_HP_BAR_HEIGHT, clrRed);
+        display.fillRectangle(70, 4, BOSS_HP_BAR_WIDTH, BOSS_HP_BAR_HEIGHT, clrMagenta);
     }
 }
 
