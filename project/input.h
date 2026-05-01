@@ -11,6 +11,7 @@ struct Input{
   bool shoot;
   bool pause;
   bool restart;
+  bool cheat;
   char key_pressed;
 }
 
