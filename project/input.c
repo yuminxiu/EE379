@@ -1,9 +1,10 @@
 #include "input.h"
-#include "xil_printf.h"
 #include "xuartps.h"
 #include "xparameters.h"
 
-extern XUartPs Uart_PS;
+#define UART_BASEADDR XPAR_XUARTPS_0_BASEADDR
+// XPAR_PS7_UART_1_BASEADDR
+
 
 void init_input(struct Input *input){
 	input->left = false;
@@ -26,9 +27,10 @@ void update_input(struct Input *input){
 	input->pause = false;
 	input->restart = false;
 	input->key_pressed = 0;
+	input->cheat = false;
 
-	if (XUartPs_IsReceiveData(XPAR_PS7_UART_1_BASEADDR)) {
-        char c = XUartPs_ReadReg(XPAR_PS7_UART_1_BASEADDR, XUARTPS_FIFO_OFFSET);
+	if (XUartPs_IsReceiveData(UART_BASEADDR)) {
+        char c = XUartPs_ReadReg(UART_BASEADDR, XUARTPS_FIFO_OFFSET);
 
         input->key_pressed = c;
 
@@ -58,7 +60,33 @@ void update_input(struct Input *input){
 		else if (c == 'k' || c == 'K'){
 			input->restart = true;
 		}
+		else if(c == 'w' || c == 'W'){
+			if(c == 'w' || c == 'W'){
+				if (c =='s' || c == 'S'){
+					if (c =='s' || c == 'S'){
+						if ( c == 'a' || c == 'A'){
+							if (c == 'd' || c =='D'){
+								if ( c == 'a' || c == 'A'){
+									if (c == 'd' || c =='D'){
+										if (c == 'q' || c =='Q'){
+											if (c == 'e' || c =='E'){
+												if (c == 'q' || c =='E'){
+													if (c == ' '){
+														input->cheat = true;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
+								
 }
 
 
