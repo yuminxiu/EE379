@@ -98,27 +98,20 @@ void player_shoot(struct Player *player, struct Bullet bullets[], int max_bullet
   int x = player->pos_x + PLAYER_WIDTH / 2;
   int y = player->pos_y;
   
-  if (player->power_type == POWERUP_TRIPLE_SHOT) {
-    //center
+  if (player->bullet_power_type == BULLET_POWER_TRIPLE_SHOT) {
+    //center, left, right
     spawn_bullet(bullets, max_bullets, x,y,0, PLAYER_BULLET_SPEED, BULLET_NORMAL, OWNER_PLAYER);
-
-    // left
-
     spawn_bullet(bullets, max_bullets, x, y, -1, PLAYER_BULLET_SPEED, BULLET_NORMAL, OWNER_PLAYER);
-
-    // right
-
     spawn_bullet(bullets, max_bullets, x, y, 1, PLAYER_BULLET_SPEED, BULLET_NORMAL, OWNER_PLAYER);
   }
 
-  else if (player->power_type == POWERUP_LASER) {
+  else if (player->bullet_power_type == BULLET_POWER_LASER) {
     spawn_bullet(bullets, max_bullets, x,y,0, PLAYER_BULLET_SPEED, BULLET_LASER, OWNER_PLAYER);
   }
-
+  else if (player->bullet_power_type == BULLET_POWER_PIERCE){ }
   else {
     // normal shot
-  spawn_bullet(bullets, max_bullets, x, y, 0, PLAYER_BULLET_SPEED, BULLET_NORMAL, OWNER_PLAYER); // values to be adjusted
-// spawns bullet at player pos w/o horizontal motion, only up. type 0, owner 0
+  spawn_bullet(bullets, max_bullets, x, y, 0, PLAYER_BULLET_SPEED, BULLET_NORMAL, OWNER_PLAYER); 
   }
 
   player->can_shoot = false;
