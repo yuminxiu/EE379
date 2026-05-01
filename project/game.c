@@ -72,6 +72,13 @@ void update_game(void){
         game.mode = MODE_PAUSED;
         return;
       }
+    
+    update_timers();
+    handle_input_playing();
+    update_entities();
+    handle_collisions();
+    handle_spawning();
+    return;
   }
 
 
@@ -119,12 +126,6 @@ if (game.mode == MODE_ENTER_INITIALS){
     return;
   }
 
-  update_timers();
-  handle_input_playing();
-  update_entities();
-  handle_collisions();
-  handle_spawning();
-  return;
 }
 
 
@@ -165,24 +166,32 @@ static void update_entities(void){
       update_boss(&boss);
       boss_shoot(&boss, bullets, MAX_BULLETS);
     } else {
-      update_alien_arr(aliens, MAX_ALIENS);
+      update_alien_arr(aliens, MAX_ALIENS, &f);
       alien_shoot(&alien, bullets, MAX_BULLETS);
       update_ship(&ship);
     }
 }
+
 static void handle_spawning(void){
   if(game.timers.powerup_spawn_timer > 300){
     int type = (rand() % 5) + 1;
-    spawn_powerup(powerups, MAX_POWERUPS,p.pos_x, p.pos_y, type, POWERUP_SPEED, POWERUP_DESPAWN_TIME);
+
+    int x = rand() % (SCREEN_WIDTH - POWERUP_WIDTH); //randomizing x position
+    int y = 0; //falls from the top
+    
+    spawn_powerup(powerups, MAX_POWERUPS, x, y, type, POWERUP_SPEED, POWERUP_DESPAWN_TIME);
     game.timers.powerup_spawn_timer = 0;
   }
 
-  if(game.timers.event_timer == 450){ //this is a placeholder value because im unsure what else will be determined by event_timer
+  if(!ship.active && game.timers.event_timer >= 450){ //this is a placeholder value because im unsure what else will be determined by event_timer
     //also unsure if spawn_ship should be triggered by event_timer or seconds_count
-    int direction;
-    if(direction == (rand() % 2 == 0)){
+    
+    int direction; //overrides initialization
+    
+    if(rand() % 2 == 0)){
       direction = 1;
-    }
+    } else { direction = -1;}
+    
     spawn_ship(&ship, direction);
     game.timers.event_timer = 0;
   }
@@ -192,10 +201,10 @@ static void handle_collisions(void){
 static void clear_wave_check(void){
   handle_collisions();
   if(*/all aliens dead*/){
-    wave++;
+    game.wave++;
     init_alien_arr(aliens, MAX_ALIENS);
     
-    if(wave == 3){
+    if(game.wave == 3){
       game.boss_stage = true;
     }
   }
