@@ -44,8 +44,12 @@ void init_game(void){
 
   game.timers.frame_count = 0;
   game.timers.seconds_count = 0;
-  game.timers.event_timer = 0;
+  game.timers.ship_spawn_timer = 0;
+  game.timers.next_ship_spawn = (rand() % 300) + 300;
   game.timers.powerup_spawn_timer = 0;
+  game.timers.next_powerup_spawn = (rand() % 300) + 200;
+
+  game.timers.wave_transition_timer = 0;
 
   init_player(&player);
   init_alien_formation(&f);
@@ -137,7 +141,7 @@ if (game.mode == MODE_ENTER_INITIALS){
 static void update_timers(void){
       game.timers.frame_count++;
       game.timers.powerup_spawn_timer++;
-      game.timers.event_timer++;
+      game.timers.ship_spawn_timer++;
 
     if (game.timers.frame_count >= GAME_FPS){
       game.timers.frame_count = 0;
