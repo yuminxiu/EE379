@@ -13,6 +13,12 @@
 #include "input.h"
 #include <stdlib.h>
 
+static void update_timers(void); // static makes it so only this file can use these functions
+static void handle_input_playing(void);
+static void update_entities(void);
+static void handle_spawning(void);
+static void handle_collisions(void);
+
 struct Game_State game;
 struct Player player;
 struct Boss boss;
