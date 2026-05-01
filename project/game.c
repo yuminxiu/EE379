@@ -34,7 +34,7 @@ struct Input input;
 
 void init_game(void){
   game.mode = MODE_START;
-  game.boss_stage = false;
+  game.boss_stage = false; 
   game.wave = 1;
 
   game.timers.frame_count = 0;
@@ -62,7 +62,7 @@ void update_game(void){
 
     if (input.shoot){
     game.mode = MODE_PLAYING;
-    }
+    }    
     return;
 }
   if (game.mode == MODE_PLAYING){
@@ -71,13 +71,6 @@ void update_game(void){
         return;
       }
     
-    game.timers.frame_count++;
-
-    if (game.timers.frame_count % GAME_FPS == 0){
-      game.timers.seconds_count++;
-    }
-    game.timers.powerup_spawn_timer++;
-    game.timers.event_timer++;
 
     update_player(&player);
     update_bullet_arr(bullets, MAX_BULLETS);
@@ -91,9 +84,6 @@ void update_game(void){
       update_ship(&ship);
     }
 
-    add_score(&sc, &player, points);
-    spawn_powerup(powerups, MAX_POWERUPS, p.pos_x,p.pos_y , rand(p.type)%6, p.dy, p.despawn_timer);
-    rand(spawn_ship(&s, rand(s.direction)%2));
   }
 
 
@@ -140,4 +130,33 @@ if (game.mode == MODE_ENTER_INITIALS){
       }
     return;
   }
+
+  update_timers();
+  handle_input_playing();
+  update_entities();
+  handle_collisions();
+  handle_spawning();
+  return;
+}
+
+
+// definitions
+
+static void update_timers(void){
+      game.timers.frame_count++;
+      game.timers.powerup_spawn_timer++;
+      game.timers.event_timer++;
+
+    if (game.timers.frame_count >= GAME_FPS){
+      game.timers.seconds_count++;
+    }
+
+}
+static void handle_input_playing(void){
+}
+static void update_entities(void){
+}
+static void handle_spawning(void){
+}
+static void handle_collisions(void){
 }
