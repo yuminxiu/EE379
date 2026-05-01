@@ -14,6 +14,7 @@ void init_input(struct Input *input){
 	input->pause = false;
 	input->restart = false;
 	input->key_pressed = 0;
+	input->cheat = false;
 }
 
 void update_input(struct Input *input){
