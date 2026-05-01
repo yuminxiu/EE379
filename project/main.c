@@ -22,7 +22,9 @@ int main(void){
   init_game_timer(&GIC);
 
   init_input(&input);
-  init_render();
+  init_render(&game, &player, powerups, MAX_POWERUPS,
+            &ship, aliens, MAX_ALIENS,
+            &sc, &boss, bullets, MAX_BULLETS);
   init_game();
 
   while (true) {
