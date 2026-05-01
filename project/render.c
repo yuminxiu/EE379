@@ -8,7 +8,7 @@ void init_render(void){
 	display.clearDisplay(clrWhite);
 }
 
-void render_game((struct Game_State *game, struct Player *player, struct PowerUp powerups[],int max_powerups, struct Ship *ship, struct Alien *aliens[3][6],int rows, int cols,
+void render_game((struct Game_State *game, struct Player *player, struct PowerUp powerups[],int max_powerups, struct Ship *ship, struct Alien *aliens[MAX_ALIENS],int rows, int cols,
     struct Score_Sys *sc, struct Boss *boss, struct Bullet bullets[], int max_bullets) {
 		//background
 		//enemies
@@ -17,7 +17,7 @@ void render_game((struct Game_State *game, struct Player *player, struct PowerUp
 
 
 
-    draw_aliens(aliens, rows, cols);
+    draw_aliens(aliens, max_aliens);
     draw_ship(ship);
     draw_boss(boss);
     draw_player(player);
