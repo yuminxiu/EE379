@@ -22,7 +22,7 @@ void render_game(struct Game_State *game,
 void draw_player(struct Player *player);
 void draw_bullets(struct Bullet bullets[], int max_bullets);
 void draw_ship(struct Ship *ship);
-void draw_aliens(struct Alien *aliens[], int rows, int cols);
+void draw_aliens(struct Alien *aliens[], int max_aliens);
 void draw_boss(struct Boss *boss);
 void draw_powerups(struct PowerUp powerups[], int max_powerups);
 void draw_ui(struct Player *player, struct Score_Sys *sc, Game_State *game);
