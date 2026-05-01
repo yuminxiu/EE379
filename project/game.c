@@ -95,6 +95,7 @@ void update_game(void){
     update_entities();
     handle_collisions();
     handle_spawning();
+    clear_wave_check();
     return;
   }
 
@@ -197,13 +198,12 @@ static void update_entities(void){
       boss_shoot(&boss, bullets, MAX_BULLETS);
     } else {
       update_alien_arr(aliens, MAX_ALIENS, &f);
-      alien_shoot(&alien, bullets, MAX_BULLETS);
       update_ship(&ship);
     }
 }
 
 static void handle_spawning(void){
-  if(game.timers.powerup_spawn_timer > 300){
+  if(game.timers.powerup_spawn_timer > game.timers.next_powerup_spawn){
     int type = (rand() % 5) + 1;
 
     int x = rand() % (SCREEN_WIDTH - POWERUP_WIDTH); //randomizing x position
@@ -211,10 +211,10 @@ static void handle_spawning(void){
     
     spawn_powerup(powerups, MAX_POWERUPS, x, y, type, POWERUP_SPEED, POWERUP_DESPAWN_TIME);
     game.timers.powerup_spawn_timer = 0;
+    game.timers.next_powerup_spawn = ((rand() % POWERUP_SPAWN_RANGE_SEC) + POWERUP_SPAWN_MIN_SEC) * GAME_FPS;
   }
 
-  if(!ship.active && game.timers.event_timer >= 450){ //this is a placeholder value because im unsure what else will be determined by event_timer
-    //also unsure if spawn_ship should be triggered by event_timer or seconds_count
+  if(!ship.active && game.timers.ship_spawn_timer >= game.timers.next_ship_spawn){ 
     
     int direction; //overrides initialization
     
@@ -223,36 +223,39 @@ static void handle_spawning(void){
     } else { direction = -1;}
     
     spawn_ship(&ship, direction);
-    game.timers.event_timer = 0;
+    game.timers.ship_spawn_timer = 0;
+    game.timers.next_ship_spawn = ((rand() % SHIP_SPAWN_RANGE_SEC) + SHIP_SPAWN_MIN_SEC) * GAME_FPS;
   }
 }
 static void handle_collisions(void){
 }
-static void clear_wave_check(void){
-  if(*/all aliens dead*/){
+
+static void clear_wave_check(void) {
+    if (game.boss_stage) {
+        if (boss.hp <= 0) {
+            game.mode = MODE_GAMEOVER;
+        }
+        return;
+    }
+
+    for (int i = 0; i < MAX_ALIENS; i++) {
+        if (aliens[i].active) {
+            return;
+        }
+    }
+
     game.wave++;
-    init_alien_arr(aliens, MAX_ALIENS);
+
     init_bullet_arr(bullets, MAX_BULLETS);
     init_powerup_arr(powerups, MAX_POWERUPS);
-    
-    if(game.wave == 3){
-      game.boss_stage = true;
-      
-      init_boss(&boss);
-      boss.active = true;
-    }
-  }
-  
-  if (game.boss_stage){
-    if (boss.hp <= 0){
-      printf("WINNER!");
-    if (qualify_high_score(&sc,sc.current_score)){
-      game.mode = MODE_ENTER_INITIALS;
-      return;
+
+    if (game.wave >= MAX_WAVE) {
+        game.boss_stage = true;
+
+        init_boss(&boss);
+        boss.active = true;
     } else {
-      game.mode = MODE_SCOREBOARD;
+        init_alien_arr(aliens, MAX_ALIENS);
+        init_alien_formation(&f);
     }
-    return;
-    }
-  }
 }
