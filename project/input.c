@@ -93,7 +93,7 @@ void update_input(struct Input *input){
 }
 
 
-*/ void buttonInterruptHandler(void *instancePointer) {
+/* void buttonInterruptHandler(void *instancePointer) {
 	//Read the button state using XGpio_DiscreteRead
 	//Set dir based on which bit is a '1';
 
@@ -109,4 +109,4 @@ XGpio_InterruptEnable (&button, XGPIO_IR_CH1_MASK);
 XGpio_InterruptGlobalEnable (&button);
 XScuGic_Enable (&GIC, GPIO_INT_ID);
 XScuGic_SetPriorityTriggerType (&GIC, GPIO_INT_ID, 0x8, 0x3);
-/*
+*/
