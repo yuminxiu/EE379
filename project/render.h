@@ -2,12 +2,13 @@
 #define RENDER_H
 
 #include "player.h"
-#incldue "bullet.h"
+#include "bullet.h"
 #include "alien.h"
 #include "boss.h"
 #include "powerup.h"
 #include "score.h"
 #include "game.h"
+#include "ship.h"
 
 void init_render(void);
 
