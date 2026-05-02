@@ -127,3 +127,4 @@ void draw_boss(struct Boss *boss) {
                           clrRed);
 
 	
+}
