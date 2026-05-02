@@ -23,7 +23,7 @@ void init_alien_arr(struct Alien aliens[], int size){
   int start_y = ENEMY_START_Y;
 
   for (int i=0; i <size; i++){
-    int row = i/ALIEN_COLS;
+    int row = i % ALIEN_ROWS;
     int col = i % ALIEN_COLS;
 
     aliens[i].active = true;
@@ -31,7 +31,7 @@ void init_alien_arr(struct Alien aliens[], int size){
     aliens[i].col = col;
 
     aliens[i].pos_x = start_x + col * (ALIEN_WIDTH + ALIEN_SPACING_X);
-    aliens[i].pos_y = start_y + col * (ALIEN_HEIGHT + ALIEN_SPACING_Y);
+    aliens[i].pos_y = start_y + row * (ALIEN_HEIGHT + ALIEN_SPACING_Y);
 
     aliens[i].sprite_type = row;
   }
@@ -41,13 +41,13 @@ void update_alien_arr(struct Alien aliens[], int size, struct Alien_Formation *f
   bool hit_edge = false;
 
   for (int i = 0; i < size; i++){ // checking if next move would hit either side
-    if (!aliens-[i].active){
+    if (!aliens[i].active){
       continue; // skips dead aliens
     }
 
     int next_x = aliens[i].pos_x + f->direction * f->speed;
 
-    if (next <= 00 || next_x + ALIEN_WIDTH >= SCREEN_WIDTH){
+    if (next_x <= 0 || next_x + ALIEN_WIDTH >= SCREEN_WIDTH){
       hit_edge = true;
       break;
     }
@@ -63,7 +63,7 @@ void update_alien_arr(struct Alien aliens[], int size, struct Alien_Formation *f
     }
 
     else { 
-      for int i = 0; i <size; i++){
+      for (int i = 0; i <size; i++){
         if (aliens[i].active) {
             aliens[i].pos_x += f->direction * f->speed;
         }
