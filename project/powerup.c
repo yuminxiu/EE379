@@ -1,7 +1,7 @@
 #include "powerup.h"
 #include "constants.h"
 
-void init_powerup(struct Powerup *p) {
+void init_powerup(struct PowerUp *p) {
     p->active = false;
     p->type = 0;
     p->pos_x = 0;
@@ -60,7 +60,7 @@ void apply_powerup(struct PowerUp *p, struct Player *player){
 
     switch(p->type) {
         case POWERUP_EXTRA_LIFE:
-            if(player-> lives < PLAYER_MAX_LIVES){
+            if(player-> lives < MAX_LIVES){
                 player->lives ++;
             }
                 break;
@@ -87,4 +87,32 @@ void apply_powerup(struct PowerUp *p, struct Player *player){
     }
 
     deactivate_powerup(p);
+}
+
+void init_powerup_arr(struct PowerUp powerups[], int size) {
+    for (int i = 0; i < size; i++) {
+        init_powerup(&powerups[i]);
+    }
+}
+
+void update_powerup_arr(struct PowerUp powerups[], int size) {
+    for (int i = 0; i < size; i++) {
+        update_powerup(&powerups[i]);
+    }
+}
+
+void spawn_powerup(struct PowerUp powerups[], int size,
+                   int x, int y, int type, int dy, int despawn_timer) {
+    for (int i = 0; i < size; i++) {
+        if (!powerups[i].active) {
+            powerups[i].active = true;
+            powerups[i].type = type;
+            powerups[i].pos_x = x;
+            powerups[i].pos_y = y;
+            powerups[i].dy = dy;
+            powerups[i].despawn_timer = despawn_timer;
+            powerups[i].landed = false;
+            return;
+        }
+    }
 }
