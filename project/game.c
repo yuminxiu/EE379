@@ -236,7 +236,7 @@ static void handle_collisions(void){
   
   for (int i = 0; i <MAX_BULLETS; i++){
     if(!bullets[i].active){
-      return;
+      continue;
     }
 //for player bullets hitting aliens, ship or boss
     if(bullets[i].owner == OWNER_PLAYER){
