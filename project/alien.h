@@ -4,7 +4,6 @@
 #include <stdbool.h>
 #include "bullet.h"
 
-#define MAX_ALIENS 18 // 3 rows of 6
 
 struct Alien {
   bool active;
