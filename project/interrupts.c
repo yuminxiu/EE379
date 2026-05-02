@@ -4,7 +4,7 @@
 
 XScuGic GIC;
 
-void initIntrSystem(XScuGic * IntcInstancePtr) {
+void initIntrSystem(XScuGic *IntcInstancePtr) {
 
 	XScuGic_Config *IntcConfig;
 	IntcConfig = XScuGic_LookupConfig(XPAR_PS7_SCUGIC_0_DEVICE_ID);
