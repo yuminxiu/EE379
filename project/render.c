@@ -17,17 +17,17 @@ void render_game(struct Game_State *game, struct Player *player, struct PowerUp 
 
 	if (game->mode == MODE_START){
 		//place holder start screen
-		display.fillRectangle(40,140,160,40,clrWhite);
+		display.drawRectangle(40,140,160,40,clrWhite);
 		return;
 	}
 
 	if (game->mode == MODE_PAUSED){
-		display.fillRectangle(60,140,120,40, clrYellow);
+		display.drawRectangle(60,140,120,40, clrYellow);
 		return;
 	}
 
 	if (game->mode == MODE_GAMEOVER){
-		display.fillRectangle(40, 140,160,40, clrRed);
+		display.drawRectangle(40, 140,160,40, clrRed);
 		return;
 	}
 
@@ -53,8 +53,8 @@ void draw_bullets(struct Bullet bullets[], int max_bullets){
 			w = ALIEN_BULLET_WIDTH;
 			h = ALIEN_BULLET_HEIGHT;
 		}
-
-		display.fillRectangle(bullets[i].pos_x, bullets[i].pos_y, w, h, clrWhite);
+		display.setForeground(clrWhite);
+		display.drawRectangle(true, bullets[i].pos_x, bullets[i].pos_y, bullets[i].pos_x + w, bullets[i].pos_y + h);
 	}
 }
 
@@ -63,8 +63,8 @@ void draw_aliens(struct Alien aliens[], int max_aliens){
 		if (!aliens[i].active){
 			continue;
 		}
-
-		display.fillRectangle(aliens[i].pos_x, aliens[i].pos_y, ALIEN_WIDTH, ALIEN_HEIGHT, clrCyan);
+		display.setForeground(clrCyan);
+		display.drawRectangle(true, aliens[i].pos_x, aliens[i].pos_y, aliens[i].pos_x + ALIEN_WIDTH, aliens[i].pos_y + ALIEN_HEIGHT);
 	}
 }
 
@@ -72,8 +72,8 @@ void draw_ship(struct Ship *ship){
 	if (!ship->active){
 		return;
 	}
-
-	display.fillRectangle(ship->pos_x, ship->pos_y, SHIP_WIDTH, SHIP_HEIGHT, clrBlue);
+	display.setForeground(clrBlue);
+	display.drawRectangle(true, ship->pos_x, ship->pos_y, ship->pos_x + SHIP_WIDTH, ship->pos_y + SHIP_HEIGHT);
 }
 
 
@@ -82,49 +82,53 @@ void draw_powerups(struct PowerUp powerups[], int max_powerups) {
         if (!powerups[i].active) {
             continue;
         }
-
-        display.fillRectangle(powerups[i].pos_x,
+		display.setForeground(clrYellow);
+        display.drawRectangle(true,powerups[i].pos_x,
                               powerups[i].pos_y,
-                              POWERUP_WIDTH,
-                              POWERUP_HEIGHT,
-                              clrYellow);
+                              powerups[i].pos_x+POWERUP_WIDTH,
+                              powerups[i].pos_y+POWERUP_HEIGHT);
+                            
     }
 }
 
 
 void draw_ui(struct Player *player, struct Score_Sys *sc, struct Game_State *game, struct Boss *boss) {
     // Simple UI strip
-    display.fillRectangle(0, 0, SCREEN_WIDTH, UI_BAR_HEIGHT, clrWhite);
+	display.setForeground(clrWhite);
+    display.drawRectangle(true,0, 0, SCREEN_WIDTH, UI_BAR_HEIGHT);
 
     // Placeholder lives blocks
     for (int i = 0; i < player->lives; i++) {
-        display.fillRectangle(4 + i * 10, 4, 8, 8, clrGreen);
+		display.setForeground(clrGreen);
+        display.drawRectangle(true,4 + i * 10, 4, 8, 8);
     }
 
     // Placeholder boss HP bar
     if (game->boss_stage && boss->active) {
-        display.fillRectangle(70, 4, BOSS_HP_BAR_WIDTH, BOSS_HP_BAR_HEIGHT, clrMagenta);
+		display.setForeground(clrMagenta)
+        display.drawRectangle(true, 70, 4, BOSS_HP_BAR_WIDTH, BOSS_HP_BAR_HEIGHT);
     }
 }
 
 void draw_player(struct Player *player) {
-    display.fillRectangle(player->pos_x,
+	display.setForeground(clrGreen);
+    display.drawRectangle(true, player->pos_x,
                           player->pos_y,
-                          PLAYER_WIDTH,
-                          PLAYER_HEIGHT,
-                          clrGreen);
+                          player->pos_x + PLAYER_WIDTH,
+                          player->pos_y + PLAYER_HEIGHT);
+                          
 }
 
 void draw_boss(struct Boss *boss) {
     if (!boss->active) {
         return;
     }
-
-    display.fillRectangle(boss->pos_x,
+	display.setForeground(clrRed)
+    display.drawRectangle(true,boss->pos_x,
                           boss->pos_y,
                           boss->width,
-                          boss->height,
-                          clrRed);
+                          boss->height
+                          );
 
 	
 }
