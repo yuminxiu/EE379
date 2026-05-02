@@ -24,9 +24,10 @@
 #define ALIEN_HEIGHT 16 // placeholder value
 
 #define ALIEN_ROWS 3
-#define ALIEN_COL 6
+#define ALIEN_COLS 6
 #define ALIEN_SPACING_Y 8 // placeholder
 #define ALIEN_SPACING_X 8 // placeholder
+#define MAX_ALIENS (ALIEN_ROWS * ALIEN_COLS)
 
 #define ALIEN_MOVE_SPEED 1 //placeholder value
 #define ALIEN_DROP_Y 8 // placeholder value
