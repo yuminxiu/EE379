@@ -10,10 +10,10 @@ bool rect_col(struct Rect a, struct Rect b){
 struct Rect player_rect(struct Player *player){
   struct Rect r;
 
-  r.x = player->pos_x;
-  r.y = player->pos_y;
-  r.width = PLAYER_WIDTH;
-  r.height = PLAYER_HEIGHT;
+  r.x = player->pos_x + (PLAYER_WIDTH - PLAYER_HITBOX_WIDTH)/2;
+  r.y = player->pos_y + (PLAYER_HEIGHT - PLAYER_HITBOX_HEIGHT)/2;
+  r.width = PLAYER_HITBOX_WIDTH;
+  r.height = PLAYER_HITBOX_HEIGHT;
 
   return r;
 }
