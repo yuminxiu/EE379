@@ -17,17 +17,20 @@ void render_game(struct Game_State *game, struct Player *player, struct PowerUp 
 
 	if (game->mode == MODE_START){
 		//place holder start screen
-		display.drawRectangle(40,140,160,40,clrWhite);
+		display.setForeground(clrWhite);
+		display.drawRectangle(true,40,140,160,40);
 		return;
 	}
 
 	if (game->mode == MODE_PAUSED){
-		display.drawRectangle(60,140,120,40, clrYellow);
+		display.setForeground(clrYellow);
+		display.drawRectangle(true,60,140,120,40);
 		return;
 	}
 
 	if (game->mode == MODE_GAMEOVER){
-		display.drawRectangle(40, 140,160,40, clrRed);
+		display.setForeground(clrRed);
+		display.drawRectangle(true,40, 140,160,40);
 		return;
 	}
 
