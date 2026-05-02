@@ -10,6 +10,15 @@
 #define MODE_SCOREBOARD 4
 #define MODE_ENTER_INITIALS 5
 
+extern struct Game_State game;
+extern struct Player player;
+extern struct PowerUp powerups[MAX_POWERUPS];
+extern struct Ship s;
+extern struct Alien aliens[MAX_ALIENS];
+extern struct Score_Sys sc;
+extern struct Boss boss;
+extern struct Bullet bullets[MAX_BULLETS];
+extern struct Input input;
 
 struct Timers {
   int frame_count; // counts frams up to GAME_FPS
