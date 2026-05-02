@@ -12,7 +12,7 @@
 #include <stdbool.h>
 
 extern XTmrCtr timer;
-extern volatile int timer_tick = 0;
+extern volatile int timer_tick;
 
 void init_game_timer(XScuGic *GIC);
 void timerInterruptHandler(void *userParam, u8 TmrCtrNumber);
