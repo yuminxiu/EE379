@@ -83,7 +83,7 @@ void update_input(struct Input *input){
 			}
 			
 		}								
-
+	}
 		int buttons = XGpio_DiscreteRead(&button,1);
 
 		if (buttons & 0x1) input->left = true;
