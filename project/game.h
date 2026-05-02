@@ -20,7 +20,7 @@ struct Timers {
   int powerup_spawn_timer;
   int next_powerup_spawn;
 
-  int wave_transistion_timer;
+  int wave_transition_timer;
 };
 
 struct Game_State {
