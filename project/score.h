@@ -21,7 +21,7 @@ struct Score_Sys {
 void init_score_sys(struct Score_Sys *sc);
 void reset_current_score(struct Score_Sys *sc);
 void add_score(struct Score_Sys *sc, struct Player *player, int points);
-void insert_high_score(struct Score_sys *sc, int score, const char initials[4]);
+void insert_high_score(struct Score_Sys *sc, int score, const char initials[4]);
 
 bool qualify_high_score(struct Score_Sys *sc, int score);
 
