@@ -3,7 +3,6 @@
 
 #include <stdbool.h>
 
-#define MAX_BULLETS 64 // value can be changed later
 
 struct Bullet {
   int pos_x;
