@@ -5,6 +5,8 @@
 #include "game_timer.h"
 #include "game.h"
 #include "render.h"
+#include "input.h"
+#include "constants.h"
 
 #include <XGpio.h>
 #include <stdio.h>
