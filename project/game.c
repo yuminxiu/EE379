@@ -222,7 +222,7 @@ static void handle_spawning(void){
     
     int direction; //overrides initialization
     
-    if(rand() % 2 == 0)){
+    if(rand() % 2 == 0){
       direction = 1;
     } else { direction = -1;}
     
@@ -252,8 +252,8 @@ static void handle_collisions(void){
             aliens[j].active = false;
             add_score(&sc, &player, ALIEN_POINTS);
 
-            if (bullets[i].type != BULLET_PIERCE && bullet[i].type != BULLET_LASER){
-              deactivate_bullet(&bullet[i]);
+            if (bullets[i].type != BULLET_PIERCE && bullets[i].type != BULLET_LASER){
+              deactivate_bullet(&bullets[i]);
             }
             break;
           }
@@ -266,8 +266,8 @@ static void handle_collisions(void){
         ship.active = false;
         add_score(&sc, &player, SHIP_POINTS);
       
-        if (bullets[i].type != BULLET_PIERCE && bullet[i].type != BULLET_LASER){
-              deactivate_bullet(&bullet[i]);
+        if (bullets[i].type != BULLET_PIERCE && bullets[i].type != BULLET_LASER){
+              deactivate_bullet(&bullets[i]);
             }
       }
 
@@ -276,8 +276,8 @@ static void handle_collisions(void){
       if (game.boss_stage && boss.active && rect_col(bullet_rect(&bullets[i]), boss_rect(&boss))){
         boss.hp--;
         
-        if (bullets[i].type != BULLET_PIERCE && bullet[i].type != BULLET_LASER){
-              deactivate_bullet(&bullet[i]);
+        if (bullets[i].type != BULLET_PIERCE && bullets[i].type != BULLET_LASER){
+              deactivate_bullet(&bullets[i]);
             }
 
         if (boss.hp <= 0){
@@ -292,11 +292,11 @@ static void handle_collisions(void){
 
         if (rect_col(bullet_rect(&bullets[i]), player_rect(&player))){
 
-          deactivate_bullet(&bullet[i]);
+          deactivate_bullet(&bullets[i]);
           player_take_hit(&player);
 
           if(player.lives <= 0){
-            game.mode == MODE_GAMEOVER;
+            game.mode = MODE_GAMEOVER;
           }
         }
       }
@@ -305,7 +305,7 @@ static void handle_collisions(void){
   //player and powerups
 
   for (int i = 0; i < MAX_POWERUPS; i++){
-    if(!powerups[i].active{
+    if(!powerups[i].active){
       continue;
     }
 
