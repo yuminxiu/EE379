@@ -60,6 +60,7 @@
 
 #define PLAYER_SPEED 3 // placeholder
 #define MAX_LIVES 4
+#define PLAYER_START_LIVES 3
 
 // BULLETS
 #define PLAYER_BULLET_WIDTH 2 // place holder
