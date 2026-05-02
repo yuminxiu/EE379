@@ -3,7 +3,7 @@
 // Player Initialization
 
 void init_player(struct Player *player){
-  player->lives = 3;
+  player->lives = PLAYER_START_LIVES;
 
   player->pos_x = 120;
   player->pos_y = PLAYER_START_Y;
