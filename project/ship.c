@@ -12,7 +12,7 @@ void init_ship(struct Ship *s){
   s-> spawn_timer = 0;
 
   s-> direction= 1; 
-};
+}
 
 void spawn_ship(struct Ship *s, int direction){
   s->active = true;
