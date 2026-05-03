@@ -108,7 +108,7 @@ void draw_ui(struct Player *player, struct Score_Sys *sc, struct Game_State *gam
 
     // Placeholder boss HP bar
     if (game->boss_stage && boss->active) {
-		display.setForeground(clrMagenta)
+		display.setForeground(clrMagenta);
         display.drawRectangle(true, 70, 4, BOSS_HP_BAR_WIDTH, BOSS_HP_BAR_HEIGHT);
     }
 }
@@ -126,7 +126,7 @@ void draw_boss(struct Boss *boss) {
     if (!boss->active) {
         return;
     }
-	display.setForeground(clrRed)
+	display.setForeground(clrRed);
     display.drawRectangle(true,boss->pos_x,
                           boss->pos_y,
                           boss->width,
