@@ -49,7 +49,7 @@ void update_ship(struct Ship *ship){
     return;
       }
 
-ship_move(s);
+ship_move(ship);
 
 }
 
