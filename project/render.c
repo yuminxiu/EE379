@@ -9,7 +9,7 @@ void init_render(void){
 	display.clearDisplay(clrWhite);
 }
 
-void render_game(struct Game_State *game, struct Player *player, struct PowerUp powerups[],int max_powerups, struct Ship *s, struct Alien aliens[], int max_aliens,
+void render_game(struct Game_State *game, struct Player *player, struct PowerUp powerups[],int max_powerups, struct Ship *ship, struct Alien aliens[], int max_aliens,
     struct Score_Sys *sc, struct Boss *boss, struct Bullet bullets[], int max_bullets) {
 
 
@@ -35,7 +35,7 @@ void render_game(struct Game_State *game, struct Player *player, struct PowerUp 
 	}
 
 	draw_aliens(aliens, max_aliens);
-    draw_ship(s);
+    draw_ship(ship);
     draw_boss(boss);
     draw_player(player);
     draw_bullets(bullets, max_bullets);
@@ -71,12 +71,12 @@ void draw_aliens(struct Alien aliens[], int max_aliens){
 	}
 }
 
-void draw_ship(struct Ship *s){
-	if (!s->active){
+void draw_ship(struct Ship *ship){
+	if (!ship->active){
 		return;
 	}
 	display.setForeground(clrBlue);
-	display.drawRectangle(true, s->pos_x, s->pos_y, s->pos_x + SHIP_WIDTH, s->pos_y + SHIP_HEIGHT);
+	display.drawRectangle(true, ship->pos_x, ship->pos_y, ship->pos_x + SHIP_WIDTH, ship->pos_y + SHIP_HEIGHT);
 }
 
 
