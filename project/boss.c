@@ -62,7 +62,7 @@ void boss_shoot_spread(struct Boss *boss, struct Bullet bullets[], int max_bulle
 
 void boss_shoot_multispiral(struct Boss *boss, struct Bullet bullets[], int max_bullets) {
 
-    int base = boss->timer_pattern % SPIRAL_STEPS;
+    int base = boss->pattern_timer % SPIRAL_STEPS;
 
     int x = boss->pos_x + boss->width / 2;
     int y = boss->pos_y + boss->height / 2;
@@ -124,7 +124,7 @@ void boss_shoot(struct Boss *boss, struct Bullet bullets[], int max_bullets){
     break;
     
 }
-
+}
 void update_boss(struct Boss *boss){
     if (!boss->active){
       return;
@@ -148,4 +148,5 @@ void update_boss(struct Boss *boss){
 
   else { boss->pattern_state = 0;
        }
+}
 }
