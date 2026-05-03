@@ -19,8 +19,8 @@ void init_boss(struct Boss *boss) {
   boss-> width = BOSS_WIDTH;
   boss-> height = BOSS_HEIGHT;
 
-  boss->pos_x =88;
-  boss->pos_y = 40;
+  boss->pos_x = (SCREEN_WIDTH - BOSS_WIDTH)/2;
+  boss->pos_y = BOSS_START_Y;
   boss->dx = BOSS_SPEED;
   boss->dy = 0;
 } // all values will be adjusted later
