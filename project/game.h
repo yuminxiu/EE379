@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <stdbool.h>
+#include "constants.h"
 
 #define MODE_START 0
 #define MODE_PLAYING 1
