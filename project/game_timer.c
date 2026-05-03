@@ -21,5 +21,6 @@ void init_game_timer(){
 	XScuGic_SetPriorityTriggerType (&GIC, TIMER_INT_ID, 0x0, 0x3 );
 	XTmrCtr_SetOptions (&timer, 0, XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION);
 	XTmrCtr_SetResetValue (&timer, 0, TIMER_RESET_VALUE); // defined in constants.h
+	XTmrCtr_Start(&timer,0);
 
 }
