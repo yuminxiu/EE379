@@ -15,10 +15,10 @@ struct Ship {
   int direction; // 1 = left, 0 = right
 };
 
-void init_ship(struct Ship *s);
-void update_ship(struct Ship *s);
-void ship_move(struct Ship *s);
-void spawn_ship(struct Ship *s, int direction);
+void init_ship(struct Ship *ship);
+void update_ship(struct Ship *ship);
+void ship_move(struct Ship *ship);
+void spawn_ship(struct Ship *ship, int direction);
 
 #endif
 
