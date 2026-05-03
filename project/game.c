@@ -133,28 +133,26 @@ if(game.mode == MODE_GAMEOVER){
     return;
   }
 
-  else {
-    game.mode = MODE_SCOREBOARD;
-    return;
-  }
-
   if (input.restart){
     init_game();
     game.mode = MODE_PLAYING;
     return;
   }
+
+  game.mode = MODE_SCOREBOARD;
+  return;
 }
 
 if (game.mode == MODE_ENTER_INITIALS){
+  if(input.shoot) {
     insert_high_score(&sc, sc.current_score, "AAA");
-  if(input.shoot){
     game.mode = MODE_SCOREBOARD;
-    return;
   }
+    return;
 }
 
   if (game.mode == MODE_SCOREBOARD){
-      if (input.restart){
+      if (input.restart||input.shoot){
         init_game();
         game.mode = MODE_PLAYING;
       }
