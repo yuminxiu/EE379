@@ -23,7 +23,7 @@ void init_alien_arr(struct Alien aliens[], int size){
   int start_y = ENEMY_START_Y;
 
   for (int i=0; i <size; i++){
-    int row = i % ALIEN_ROWS;
+    int row = i / ALIEN_ROLS;
     int col = i % ALIEN_COLS;
 
     aliens[i].active = true;
