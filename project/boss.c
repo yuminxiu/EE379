@@ -149,4 +149,4 @@ void update_boss(struct Boss *boss){
   else { boss->pattern_state = 0;
        }
 }
-}
+
