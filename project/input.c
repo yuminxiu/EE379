@@ -77,9 +77,9 @@ void update_input(struct Input *input){
 			if (cheat_code[cheat_index] == '\0'){
 				input->cheat = true;
 				cheat_index = 0;
-			}
-			else {
+			}else {
 				cheat_index = 0;
+
 			}
 			
 		}								
