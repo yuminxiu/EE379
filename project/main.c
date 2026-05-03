@@ -33,7 +33,7 @@ int main(void){
   
       update_game();
       render_game(&game, &player, powerups, MAX_POWERUPS,
-            &ship, aliens, MAX_ALIENS,
+            &s, aliens, MAX_ALIENS,
             &sc, &boss, bullets, MAX_BULLETS);
     }
   }
