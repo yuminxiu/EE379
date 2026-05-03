@@ -21,7 +21,7 @@ void init_boss(struct Boss *boss) {
 
   boss->pos_x =88;
   boss->pos_y = 40;
-  boss->dx = boss_speed;
+  boss->dx = BOSS_SPEED;
   boss->dy = 0;
 } // all values will be adjusted later
 
@@ -34,7 +34,7 @@ void move_boss(struct Boss *boss) {
     boss->pos_x += boss->dx;
     boss->pos_y += boss->dy;
 
-    if(boss->pos_x + boss->width >= ){
+    if(boss->pos_x + boss->width >= SCREEN_WIDTH){
       boss->pos_x = SCREEN_WIDTH - boss->width;
       boss->dx =-1;
     }
@@ -111,9 +111,9 @@ void boss_shoot(struct Boss *boss, struct Bullet bullets[], int max_bullets){
       boss_shoot_spread(boss,bullets, max_bullets);
     break;
 
-    case BOSS_PATTERN_TRACK:
+   /* case BOSS_PATTERN_TRACK:
       boss_shoot_track(boss, bullets, max_bullets);
-    break;
+    break; */
 
     case BOSS_PATTERN_SPIRAL:
       boss_shoot_multispiral(boss, bullets, max_bullets);
@@ -138,7 +138,7 @@ void update_boss(struct Boss *boss){
     boss->pattern_state++;
 
     if (boss->pattern_state > BOSS_PATTERN_SPIRAL){
-      boss->pattern_state = BOSSS_PATTERN_STRAIGHT;
+      boss->pattern_state = BOSS_PATTERN_STRAIGHT;
     }
   }
 
