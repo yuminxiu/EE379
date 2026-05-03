@@ -1,4 +1,4 @@
-#include bossbeam.h"
+/* #include bossbeam.h"
 #include "constants.h"
 
 #include <stdlib.h>
@@ -93,5 +93,5 @@ void update_boss_beam_arr(struct BossBeam beams[], int size){
   }
 }
 
-
+*/
 
