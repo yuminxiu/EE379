@@ -18,19 +18,19 @@ void render_game(struct Game_State *game, struct Player *player, struct PowerUp 
 	if (game->mode == MODE_START){
 		//place holder start screen
 		display.setForeground(clrWhite);
-		display.drawRectangle(true,40,140,160,40);
+		display.drawRectangle(true,40,140,40+160,140+40);
 		return;
 	}
 
 	if (game->mode == MODE_PAUSED){
 		display.setForeground(clrYellow);
-		display.drawRectangle(true,60,140,120,40);
+		display.drawRectangle(true,60,140,60+120,140+40);
 		return;
 	}
 
 	if (game->mode == MODE_GAMEOVER){
 		display.setForeground(clrRed);
-		display.drawRectangle(true,40, 140,160,40);
+		display.drawRectangle(true,40, 140,40+160,140+40);
 		return;
 	}
 
@@ -103,13 +103,13 @@ void draw_ui(struct Player *player, struct Score_Sys *sc, struct Game_State *gam
     // Placeholder lives blocks
     for (int i = 0; i < player->lives; i++) {
 		display.setForeground(clrGreen);
-        display.drawRectangle(true,4 + i * 10, 4, 8, 8);
+        display.drawRectangle(true,4 + i * 10, 4, 4+i*10+ 8, 4+8);
     }
 
     // Placeholder boss HP bar
     if (game->boss_stage && boss->active) {
 		display.setForeground(clrMagenta);
-        display.drawRectangle(true, 70, 4, BOSS_HP_BAR_WIDTH, BOSS_HP_BAR_HEIGHT);
+        display.drawRectangle(true, 70, 4, 70+BOSS_HP_BAR_WIDTH, 4+BOSS_HP_BAR_HEIGHT);
     }
 }
 
@@ -129,8 +129,8 @@ void draw_boss(struct Boss *boss) {
 	display.setForeground(clrRed);
     display.drawRectangle(true,boss->pos_x,
                           boss->pos_y,
-                          boss->width,
-                          boss->height
+                          boss->pos_x+ boss->width,
+                          boss->pos_y +boss->height
                           );
 
 	
