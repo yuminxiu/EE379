@@ -16,8 +16,6 @@ void init_score_sys(struct Score_Sys *sc){
 }
 
 void add_score(struct Score_Sys *sc, struct Player *player, int points){
-  sc ->current_score = 0;
-
   if(player->score_mult_active){
     points *= SCORE_MULT;
   }
