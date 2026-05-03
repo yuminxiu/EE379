@@ -4,7 +4,7 @@
 volatile int timer_tick = 0;
 
 XTmrCtr timer;
-XScuGic GIC;
+//XScuGic GIC;
 void timerInterruptHandler(void *userParam, u8 TmrCtrNumber) {
 
 	timer_tick = 1; // flag for main loop
@@ -12,7 +12,7 @@ void timerInterruptHandler(void *userParam, u8 TmrCtrNumber) {
 
 }
 
-void init_game_timer(XScuGic GIC){
+void init_game_timer(){
 	
 	XTmrCtr_Initialize (&timer, XPAR_AXI_TIMER_0_DEVICE_ID);
 	XTmrCtr_SetHandler(&timer, ( XTmrCtr_Handler ) timerInterruptHandler, ( void*) 0x12345678 );
