@@ -2,10 +2,10 @@
 #include "constants.h"
 
 
-void init_score_sys(struct Score_Sys *sc)(
+void init_score_sys(struct Score_Sys *sc}(
   sc->current_score = 0;
 
-  for (i = 0; i < MAX_SCORE; i++){
+  for (i = 0; i < MAX_SCORES; i++){
       sc->top_scores[i].initials[0] = '-';
       sc->top_scores[i].initials[1] = '-';
       sc->top_scores[i].initials[2] = '-';
@@ -38,7 +38,7 @@ int high_score_rank(struct Score_Sys *sc, int score){
 return -1;
 }
 
-void insert_high_score(struct Score_sys *sc, int score, const char initials[4]){
+void insert_high_score(struct Score_Sys *sc, int score, const char initials[4]){
   int rank = high_score_rank(sc, score);
 
 if (rank == -1) {
@@ -46,7 +46,7 @@ if (rank == -1) {
 }
 
 for (i= MAX_SCORES - 1; i>rank; i--) {
-  sc->top_scores[i] = score_sys -> top_scores[i-1];
+  sc->top_scores[i] = sc -> top_scores[i-1];
 
     sc->top_scores[rank].score = score;
 
