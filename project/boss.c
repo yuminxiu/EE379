@@ -36,7 +36,12 @@ void move_boss(struct Boss *boss) {
 
     if(boss->pos_x + boss->width >= SCREEN_WIDTH){
       boss->pos_x = SCREEN_WIDTH - boss->width;
-      boss->dx =-1;
+      boss->dx =-BOSS_SPEED;
+    }
+
+    if(boss->pos_x <=0){
+      boss_pos_x = 0;
+      boss->dx = BOSS_SPEED;
     }
 }
 
