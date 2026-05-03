@@ -64,7 +64,7 @@
 
 // BULLETS
 #define PLAYER_BULLET_WIDTH 2 // place holder
-#define PLAYER_BULLET_HEIGHT 6 // placeholder
+#define PLAYER_BULLET_HEIGHT 10 // placeholder
 
 #define ALIEN_BULLET_WIDTH 2 // placeholder
 #define ALIEN_BULLET_HEIGHT 6 // placeholder
@@ -127,7 +127,7 @@
 
 // TIMING
 #define PLAYER_SHOOT_COOLDOWN 10 // placeholder
-#define ALIEN_SHOOT_COOLDOWN 60 // placeholder
+#define ALIEN_SHOOT_COOLDOWN 15 // placeholder
 #define BOSS_SHOOT_COOLDOWN 15 //placeholder
 
 //UI
