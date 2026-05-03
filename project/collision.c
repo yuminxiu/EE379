@@ -27,8 +27,8 @@ struct Rect bullet_rect(struct Bullet *bullet){
   if (bullet->owner == OWNER_PLAYER){
   r.width = PLAYER_BULLET_WIDTH;
   r.height = PLAYER_BULLET_HEIGHT;}
-  else { r.width = ENEMY_BULLET_WIDTH;
-        r.height = ENEMY_BULLET_HEIGHT;
+  else { r.width = ALIEN_BULLET_WIDTH;
+        r.height = ALIEN_BULLET_HEIGHT;
        }
   return r;
 
