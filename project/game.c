@@ -64,7 +64,7 @@ void update_game(void){
   update_input(&input);
 
   if (game.mode == MODE_START){
-    printf("Press Space to Start!");
+
     if (input.cheat){
       init_bullet_arr(bullets, MAX_BULLETS);
       init_powerup_arr(powerups, MAX_POWERUPS);
@@ -103,7 +103,7 @@ void update_game(void){
 
 
   if (game.mode == MODE_PAUSED){
-    printf("PAUSED");
+
     if (input.cheat){
       init_bullet_arr(bullets, MAX_BULLETS);
       init_powerup_arr(powerups, MAX_POWERUPS);
@@ -127,7 +127,7 @@ void update_game(void){
 }
 
 if(game.mode == MODE_GAMEOVER){
-  printf("GAME OVER");
+
   if (qualify_high_score(&sc,sc.current_score)){
     game.mode = MODE_ENTER_INITIALS;
     return;
