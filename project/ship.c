@@ -2,50 +2,50 @@
 #include "constants.h"
 
 
-void init_ship(struct Ship *s){
-  s->active = false;
+void init_ship(struct Ship *ship){
+  ship->active = false;
 
-  s-> pos_x=0;
-  s-> pos_y = 0;
-  s-> dx = 0;
+  ship-> pos_x=0;
+  ship-> pos_y = 0;
+  ship-> dx = 0;
 
-  s-> spawn_timer = 0;
+  ship-> spawn_timer = 0;
 
-  s-> direction= 1; 
+  ship-> direction= 1; 
 }
 
-void spawn_ship(struct Ship *s, int direction){
-  s->active = true;
-  s->direction = direction;
-  s->dx = s->direction * SHIP_SPEED;
+void spawn_ship(struct Ship *ship, int direction){
+  ship->active = true;
+  ship->direction = direction;
+  ship->dx = ship->direction * SHIP_SPEED;
 
-  s-> pos_y = 20; // near top of screen
+  ship-> pos_y = 20; // near top of screen
 
   if (direction == 1){
     //moving left -> right
-      s->pos_x = -SHIP_WIDTH;}
+      ship->pos_x = -SHIP_WIDTH;}
   else { 
     //moving right -> left
-    s->pos_x = SCREEN_WIDTH;
+    ship->pos_x = SCREEN_WIDTH;
   }
 }
 
 
 
-void ship_move(struct Ship *s){
-    if (!s->active){
+void ship_move(struct Ship *ship){
+    if (!ship->active){
       return;
     }
 
-  s-> pos_x += s->dx;
+  ship-> pos_x += ship->dx;
 
-  if (s->pos_x > SCREEN_WIDTH || s->pos_x + SHIP_WIDTH <0){
-      s-> active = false;
+  if (ship->pos_x > SCREEN_WIDTH || ship->pos_x + SHIP_WIDTH <0){
+      ship-> active = false;
   }
 }
 
-void update_ship(struct Ship *s){
-  if (!s->active){
+void update_ship(struct Ship *ship){
+  if (!ship->active){
     return;
       }
 
