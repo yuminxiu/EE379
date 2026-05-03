@@ -21,7 +21,7 @@
 
 int main(void){
   initIntrSystem(&GIC);
-  init_game_timer(&GIC);
+  init_game_timer();
 
   init_input(&input);
   init_render();
@@ -33,7 +33,7 @@ int main(void){
   
       update_game();
       render_game(&game, &player, powerups, MAX_POWERUPS,
-            &s, aliens, MAX_ALIENS,
+            &ship, aliens, MAX_ALIENS,
             &sc, &boss, bullets, MAX_BULLETS);
     }
   }
