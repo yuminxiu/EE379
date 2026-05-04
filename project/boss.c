@@ -26,6 +26,15 @@ void init_boss(struct Boss *boss) {
 } // all values will be adjusted later
 
 
+bool beams_active(struct BossBeam beams[], int max_beams){
+  for (int i = 0, i < max_beams; i++){
+    if (beams[i]active){
+      return true;
+    }
+  }
+  return false;
+}
+
 void move_boss(struct Boss *boss) {
     if(!boss->active){
         return;
@@ -102,8 +111,11 @@ void boss_shoot_track(struct Boss *boss, strut BossBeam beams[], int max_beams){
   if (!boss->active){
     return;
   }
-
+  if (beams_active(beams,max_beams)){
+    return;
+  }
   start_beam_cage(beams,max_beams);
+}
 
 void boss_shoot(struct Boss *boss, struct Bullet bullets[], int max_bullets, struct BossBeam beams[], int max_beams){
   if (!boss->active){
