@@ -14,7 +14,7 @@ void render_game(struct Game_State *game, struct Player *player, struct PowerUp 
     struct Score_Sys *sc, struct Boss *boss, struct Bullet bullets[], int max_bullets, struct BossBeam beams[], int max_beams) {
 
 
-	display.clearDisplay(clrBlack);
+	// display.clearDisplay(clrBlack);
 
 	if (game->mode == MODE_START){
 		//place holder start screen
@@ -124,6 +124,33 @@ void draw_ui(struct Player *player, struct Score_Sys *sc, struct Game_State *gam
 	sprintf(score_text, "SCORE %d", sc->current_score);
 	display.setForeground(clrBlack);
 	display.drawTex(score_text,80,4);
+
+	int icon_x = 150;
+
+	if (player->shield_active) {
+	    display.setForeground(clrCyan);
+	    display.drawRectangle(true, icon_x, 4, icon_x + 8, 12);
+	    icon_x += 12;
+	}
+	
+	if (player->score_mult_active) {
+	    display.setForeground(clrYellow);
+	    display.drawRectangle(true, icon_x, 4, icon_x + 8, 12);
+	    icon_x += 12;
+	}
+	
+	if (player->bullet_power_type == BULLET_POWER_LASER) {
+	    display.setForeground(clrRed);
+	    display.drawRectangle(true, icon_x, 4, icon_x + 8, 12);
+	}
+	else if (player->bullet_power_type == BULLET_POWER_TRIPLE_SHOT) {
+	    display.setForeground(clrGreen);
+	    display.drawRectangle(true, icon_x, 4, icon_x + 8, 12);
+	}
+	else if (player->bullet_power_type == BULLET_POWER_PIERCE) {
+	    display.setForeground(clrMagenta);
+	    display.drawRectangle(true, icon_x, 4, icon_x + 8, 12);
+	}
 }
 
 void draw_player(struct Player *player) {
@@ -132,6 +159,10 @@ void draw_player(struct Player *player) {
                           player->pos_y,
                           player->pos_x + PLAYER_WIDTH,
                           player->pos_y + PLAYER_HEIGHT);
+
+	if(player->shield_active) {
+		display.setForeground(clrCyan);
+		display.drawRectangle(false, player->pos_x -2, player->pos_y - 2, player->pos_x + PLAYER_WIDTH + 2, player->pos_y + PLAYER_HEIGHT + 2);
                           
 }
 
