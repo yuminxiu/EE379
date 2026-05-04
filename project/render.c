@@ -42,6 +42,7 @@ void render_game(struct Game_State *game, struct Player *player, struct PowerUp 
     draw_bullets(bullets, max_bullets);
     draw_powerups(powerups, max_powerups);
     draw_ui(player, sc, game, boss);
+	draw_boss_beams(beams, max_beams);
 }
 
 void draw_bullets(struct Bullet bullets[], int max_bullets){
@@ -146,4 +147,22 @@ void draw_boss(struct Boss *boss) {
                           );
 
 	
+}
+
+void draw_boss_beams(struct BossBeam beams[], int max_beams){
+	for (int i = 0, i < max_beams; i++){
+		if (!beams[i].active){
+		continue;
+		}
+
+		if (beams[i].firing) {
+			display.setForeground(clrMagenta);
+			display.drawRectangle(true, beams[i].x, beams[i].y, beams[i].x + beams[i].width, beams[i].y + beams[i].height);
+		} else {
+			display.setForeground(clrYellow);
+			display.drawRectangle(false, beams[i].x, beams[i].y, beams[i].x+ beams[i].width, beams[i].y + beams[i].height);
+		}
+	}
+}
+
 }
