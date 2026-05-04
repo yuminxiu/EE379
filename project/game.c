@@ -310,6 +310,19 @@ static void handle_collisions(void){
             game.mode = MODE_GAMEOVER;
           }
         }
+        for (int i = 0, i < MAX_BEAMS; i++){
+          if (!beams[i].active || !beams[i].firing){
+            continue;
+          }
+
+          if (rect_col(player_rect(&player), boss_beam_rect(&beams[i]))) {
+            player_take_hit(&player);
+
+            if(player.lives <= 0) {
+              game.mode = MODE_GAMEOVER;
+            }
+          }
+        }
       }
   }
   
