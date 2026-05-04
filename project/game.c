@@ -20,7 +20,9 @@ static void handle_spawning(void);
 static void handle_collisions(void);
 static void clear_wave_check(void);
 static void handle_alien_shooting(void);
-static void int pause_lock = 0;
+static void start_boss_stage(void);
+
+static bool prev_pause = false;
 
 struct Game_State game;
 struct Player player;
@@ -50,6 +52,8 @@ void init_game(void){
 
   game.timers.wave_transition_timer = 0;
 
+  prev_pause  = false;
+
   init_player(&player);
   init_alien_formation(&f);
   init_alien_arr(aliens, MAX_ALIENS);
@@ -65,21 +69,14 @@ void init_game(void){
 void update_game(void){
   update_input(&input);
 
+  bool paused_pressed = input.pause && !prev_pause;
+  prev_pause = input.pause;
+
   if (game.mode == MODE_START){
 
     if (input.cheat){
-      init_bullet_arr(bullets, MAX_BULLETS);
-      init_powerup_arr(powerups, MAX_POWERUPS);
-      init_alien_arr(aliens, MAX_ALIENS); 
-      init_ship(&ship); //prevents ship from randomly existing
-      
-      game.wave = 3;
-      game.boss_stage = true;
-      
-      init_boss(&boss); // cleanly reset boss
-      boss.active = true;
+     start_boss_stage();
       game.mode = MODE_PLAYING;
-
       return;
     }
 
@@ -88,14 +85,10 @@ void update_game(void){
     }    
     return;
 }
-  if (pause_lock >0){
-    pause_lock--;
-  }
   
   if (game.mode == MODE_PLAYING){
-      if(input.pause && pause_lock == 0){
+      if(pause_pressed){
         game.mode = MODE_PAUSED;
-        pause_lock = 10;
         return;
       }
     
@@ -112,24 +105,14 @@ void update_game(void){
   if (game.mode == MODE_PAUSED){
 
     if (input.cheat){
-      init_bullet_arr(bullets, MAX_BULLETS);
-      init_powerup_arr(powerups, MAX_POWERUPS);
-      init_alien_arr(aliens, MAX_ALIENS); 
-      init_ship(&ship); //prevents ship from randomly existing
-      
-      game.wave = 3;
-      game.boss_stage = true;
-      
-      init_boss(&boss); // cleanly reset boss
-      boss.active = true;
-      game.mode = MODE_PLAYING;
-
+      start_boss_stage();
+      game.mode= MODE_PLAYING;
       return;
     }
 
     if((input.pause||input.shoot)) && pause_lock ==0){
       game.mode = MODE_PLAYING;
-      pause_lock = 10;
+      return;
     }
   return;
 }
@@ -364,12 +347,20 @@ static void clear_wave_check(void) {
     init_powerup_arr(powerups, MAX_POWERUPS);
 
     if (game.wave >= MAX_WAVE) {
-        game.boss_stage = true;
-
-        init_boss(&boss);
-        boss.active = true;
+      start_boss_stage();
     } else {
         init_alien_arr(aliens, MAX_ALIENS);
         init_alien_formation(&f);
     }
+}
+
+static void start_boss_stage(void){
+  init_bullet_arr(bullets, MAX_BULLETS);
+  init_powerup_arr(powerups, MAX_POWERUPS);
+  init_alien_arr(aliens,MAX_ALIENS);
+  init_ship(&ship);
+
+  game.wave = 3;
+  game.boss_stage = true;
+  boss.active = true;
 }
