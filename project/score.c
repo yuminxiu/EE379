@@ -45,7 +45,7 @@ if (rank == -1) {
 }
 
 
-for (int i= MAX_SCORES - 1; i=>rank; i--) {
+for (int i= MAX_SCORES - 1; i >= rank; i--) {
   sc->top_scores[i] = sc -> top_scores[i-1];
 
     sc->top_scores[rank].score = score;
