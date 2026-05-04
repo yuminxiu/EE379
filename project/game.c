@@ -11,6 +11,7 @@
 #include "ship.h"
 #include "bullet.h"
 #include "input.h"
+#include "bossbeam.h"
 #include <stdlib.h>
 
 static void update_timers(void); // static makes it so only this file can use these functions
@@ -34,6 +35,7 @@ struct Ship ship;
 struct PowerUp powerups[MAX_POWERUPS];
 struct Score_Sys sc;
 struct Input input;
+struct BossBeam beams[MAX_BEAMS];
 
 #define MAX_WAVE 3
 
