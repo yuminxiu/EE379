@@ -98,7 +98,14 @@ void boss_shoot_burst(struct Boss *boss, struct Bullet bullets[], int max_bullet
     }
 }
 
-void boss_shoot(struct Boss *boss, struct Bullet bullets[], int max_bullets){
+void boss_shoot_track(struct Boss *boss, strut BossBeam beams[], int max_beams){
+  if (!boss->active){
+    return;
+  }
+
+  start_beam_cage(beams,max_beams);
+
+void boss_shoot(struct Boss *boss, struct Bullet bullets[], int max_bullets, struct BossBeam beams[], int max_beams){
   if (!boss->active){
     return;
   }
@@ -116,9 +123,9 @@ void boss_shoot(struct Boss *boss, struct Bullet bullets[], int max_bullets){
       boss_shoot_spread(boss,bullets, max_bullets);
     break;
 
-   /* case BOSS_PATTERN_TRACK:
-      boss_shoot_track(boss, bullets, max_bullets);
-    break; */
+    case BOSS_PATTERN_TRACK:
+      boss_shoot_track(boss, beams, max_beams);
+    break; 
 
     case BOSS_PATTERN_SPIRAL:
       boss_shoot_multispiral(boss, bullets, max_bullets);
@@ -141,10 +148,10 @@ void update_boss(struct Boss *boss){
   if (boss->pattern_timer >= BOSS_PATTERN_TIME) {
     boss->pattern_timer = 0
     
-      int new_pattern = rand() % 4;
+      int new_pattern = rand() % 5;
 
     while (new_pattern == boss->pattern_state){
-      new_pattern = rand() % 4;
+      new_pattern = rand() % 5;
     }
     boss->pattern_state = new_pattern;
   }
