@@ -310,7 +310,11 @@ static void handle_collisions(void){
             game.mode = MODE_GAMEOVER;
           }
         }
-        for (int i = 0, i < MAX_BEAMS; i++){
+
+      }
+  }
+      //beams vs player
+      for (int i = 0, i < MAX_BEAMS; i++){
           if (!beams[i].active || !beams[i].firing){
             continue;
           }
@@ -323,9 +327,6 @@ static void handle_collisions(void){
             }
           }
         }
-      }
-  }
-  
   //player and powerups
 
   for (int i = 0; i < MAX_POWERUPS; i++){
