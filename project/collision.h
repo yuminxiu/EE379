@@ -9,6 +9,7 @@
 #include "alien.h"
 #include "ship.h"
 #include "powerup.h"
+#include "bossbeam.h"
 
 struct Rect {  // hitbox needed for collisions
     int x;
@@ -25,5 +26,6 @@ struct Rect boss_rect(struct Boss *boss);
 struct Rect powerup_rect(struct PowerUp *p);
 struct Rect alien_rect(struct Alien *alien);
 struct Rect ship_rect(struct Ship *s);
+struct Rect boss_beam_rect(struct BossBeam *b);
 
 #endif
