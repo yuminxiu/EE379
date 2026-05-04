@@ -20,6 +20,7 @@ static void handle_spawning(void);
 static void handle_collisions(void);
 static void clear_wave_check(void);
 static void handle_alien_shooting(void);
+static void int pause_lock = 0;
 
 struct Game_State game;
 struct Player player;
@@ -87,9 +88,14 @@ void update_game(void){
     }    
     return;
 }
+  if (pause_lock >0){
+    pause_lock--;
+  }
+  
   if (game.mode == MODE_PLAYING){
-      if(input.pause){
+      if(input.pause && pause_lock == 0){
         game.mode = MODE_PAUSED;
+        pause_lock = 10;
         return;
       }
     
@@ -121,8 +127,9 @@ void update_game(void){
       return;
     }
 
-    if(input.pause||input.shoot){
+    if((input.pause||input.shoot)) && pause_lock ==0){
       game.mode = MODE_PLAYING;
+      pause_lock = 10;
     }
   return;
 }
