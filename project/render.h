@@ -9,6 +9,7 @@
 #include "score.h"
 #include "game.h"
 #include "ship.h"
+#include "bossbeam.h"
 
 void init_render(void);
 
@@ -27,5 +28,6 @@ void draw_aliens(struct Alien aliens[], int max_aliens);
 void draw_boss(struct Boss *boss);
 void draw_powerups(struct PowerUp powerups[], int max_powerups);
 void draw_ui(struct Player *player, struct Score_Sys *sc, struct Game_State *game, struct Boss *boss);
+void draw_boss_beams(struct BossBeam beams[], int max_beams);
 
 #endif
