@@ -19,7 +19,8 @@ void render_game(struct Game_State *game,
     struct Ship *ship, struct Alien aliens[],int max_aliens,
     struct Score_Sys *sc, 
     struct Boss *boss, 
-    struct Bullet bullets[], int max_bullets);
+    struct Bullet bullets[], int max_bullets
+    struct BossBeam beams[], int max_beams);
 
 void draw_player(struct Player *player);
 void draw_bullets(struct Bullet bullets[], int max_bullets);
