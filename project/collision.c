@@ -76,3 +76,14 @@ struct Rect powerup_rect(struct PowerUp *p){
 
   return r;
 }
+
+struct Rect boss_beam_rect(struct BossBeam *b){
+  struct Rect r;
+
+  r.x=b->x;
+  r.y = b->y;
+  r.width = b->width;
+  r.height = b->height;
+
+  return r;
+}
