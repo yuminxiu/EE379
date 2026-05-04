@@ -11,7 +11,7 @@ void init_render(void){
 }
 
 void render_game(struct Game_State *game, struct Player *player, struct PowerUp powerups[],int max_powerups, struct Ship *ship, struct Alien aliens[], int max_aliens,
-    struct Score_Sys *sc, struct Boss *boss, struct Bullet bullets[], int max_bullets) {
+    struct Score_Sys *sc, struct Boss *boss, struct Bullet bullets[], int max_bullets, struct BossBeam beams[], int max_beams) {
 
 
 	display.clearDisplay(clrBlack);
