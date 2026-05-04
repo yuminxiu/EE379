@@ -138,20 +138,17 @@ void update_boss(struct Boss *boss){
     move_boss(boss);
     boss->pattern_timer++;
 
-  // pattern timer placeholder that only loops between 2 states
-  if (boss->pattern_timer % 300 == 0) {
-    boss->pattern_state++;
+  if (boss->pattern_timer >= BOSS_PATTERN_TIME) {
+    boss->pattern_timer = 0
+    
+      int new_pattern = rand() % 4;
 
-    if (boss->pattern_state > BOSS_PATTERN_SPIRAL){
-      boss->pattern_state = BOSS_PATTERN_STRAIGHT;
+    while (new_pattern == boss->pattern_state){
+      new_pattern = rand() % 4;
     }
+    boss->pattern_state = new_pattern;
   }
 
-  if (boss->hp <= boss->max_hp/2){
-    boss->pattern_state = 1;
-  }
 
-  else { boss->pattern_state = 0;
-       }
 }
 
