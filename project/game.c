@@ -19,6 +19,7 @@ static void update_entities(void);
 static void handle_spawning(void);
 static void handle_collisions(void);
 static void clear_wave_check(void);
+static void handle_alien_shooting(void);
 
 struct Game_State game;
 struct Player player;
@@ -201,9 +202,31 @@ static void update_entities(void){
     } else {
       update_alien_arr(aliens, MAX_ALIENS, &f);
       update_ship(&ship);
+      handle_alien_shooting();
     }
 }
 
+static void handle_alien_shooting(void){
+  static int alien_shoot_timer = 0;
+  alien_shoot_timer++;
+
+  if (alien_shoot_timer < ALIEN_SHOOT_COOLDOWN) {
+    return;
+  }
+
+  alien_shoot_timer = 0;
+
+  int start = rand() % MAX_ALIENS;
+
+  for (int i = 0; i < MAX_ALIENS; i++){
+    int index = (start +i) % MAX_ALIENS;
+
+    if (aliens[i].active){
+      alien_shoot(&aliens[index],bullets, MAX_BULLETS);
+      return;
+    }
+  }
+}
 static void handle_spawning(void){
   if(game.timers.powerup_spawn_timer > game.timers.next_powerup_spawn){
     int type = (rand() % 5) + 1;
