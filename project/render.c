@@ -1,6 +1,7 @@
 #include "render.h"
 #include "constants.h"
 #include <MyDisp.h>
+#include <stdio.h>
 
 MYDISP display;
 
@@ -24,13 +25,13 @@ void render_game(struct Game_State *game, struct Player *player, struct PowerUp 
 
 	if (game->mode == MODE_PAUSED){
 		display.setForeground(clrYellow);
-		display.drawRectangle(true,60,140,60+120,140+40);
+		display.drawRectangle("PAUSED", 90, 150);
 		return;
 	}
 
 	if (game->mode == MODE_GAMEOVER){
 		display.setForeground(clrRed);
-		display.drawRectangle(true,40, 140,40+160,140+40);
+		display.drawText("GAME OVER", 70,150);
 		return;
 	}
 
@@ -108,9 +109,20 @@ void draw_ui(struct Player *player, struct Score_Sys *sc, struct Game_State *gam
 
     // Placeholder boss HP bar
     if (game->boss_stage && boss->active) {
+		int hp_width = (boss->hp * BOSS_HP_BAR_WIDTH)/ boss->max_hp;
+
+		display.setForeground(clrWhite);
+		display.drawRectangle(false, 70, 4, 70+BOSS_HP_BAR_WIDTH, 4 + BOSS_HP_BAR_HEIGHT);
+		
 		display.setForeground(clrMagenta);
         display.drawRectangle(true, 70, 4, 70+BOSS_HP_BAR_WIDTH, 4+BOSS_HP_BAR_HEIGHT);
     }
+
+	//placeholder score
+	char score_text[20];
+	sprintf(score_text, "SCORE %d", sc->current_score);
+	display.setForeground(clrBlack);
+	display.drawTex(score_text,80,4);
 }
 
 void draw_player(struct Player *player) {
