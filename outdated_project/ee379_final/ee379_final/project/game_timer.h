@@ -1,0 +1,21 @@
+#ifndef GAMETIMER_H
+#define GAMETIMER_H
+
+#include "xscugic.h"
+#include "xtmrctr.h"
+#include "xparameters.h"
+#include "interrupts.h"
+
+
+#define TIMER_INT_ID  XPAR_FABRIC_AXI_TIMER_0_INTERRUPT_INTR
+
+
+#include <stdbool.h>
+
+extern XTmrCtr timer;
+extern volatile int timer_tick;
+
+void init_game_timer();
+void timerInterruptHandler(void *userParam, u8 TmrCtrNumber);
+
+#endif

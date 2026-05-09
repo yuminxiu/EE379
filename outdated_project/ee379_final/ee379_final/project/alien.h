@@ -1,0 +1,35 @@
+#ifndef ALIEN_H
+#define ALIEN_H
+
+#include <stdbool.h>
+#include "bullet.h"
+
+
+struct Alien {
+  bool active;
+
+  int pos_x;
+  int pos_y;
+  int row;
+  int col;
+
+  int sprite_type;
+
+};
+
+struct Alien_Formation {
+  int speed;
+  int direction; // -1 = left, +1 = right
+  int step_down;
+};
+
+void init_alien(struct Alien *alien);
+void init_alien_arr(struct Alien aliens[], int size);
+void init_alien_formation(struct Alien_Formation *f);
+
+void update_alien_arr(struct Alien aliens[], int size, struct Alien_Formation *f);
+void alien_shoot(struct Alien *alien, struct Bullet bullets[], int max_bullets);
+
+void move_alien(struct Alien *alien, struct Alien_Formation *f); // not currently used
+void update_alien(struct Alien *alien, struct Alien_Formation *f); // not currently used
+#endif
