@@ -12,7 +12,7 @@ struct Ship {
 
   int spawn_timer;
 
-  int direction; // 1 = left, 0 = right
+  int direction; 
 };
 
 void init_ship(struct Ship *ship);
